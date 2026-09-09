@@ -1,0 +1,3037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MOHAMMAD TRAVELS — Fly Simply</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F6F3;
+    --surface:#FFFFFF;
+    --ink:#0F2438;
+    --ink-soft:#5B6B78;
+    --ink-faint:#8B99A3;
+    --navy:#0E2A43;
+    --navy-deep:#081A2C;
+    --gold:#D99A3F;
+    --gold-deep:#B87F2D;
+    --teal:#12707A;
+    --coral:#E15A3C;
+    --border:#E1E4DF;
+    --border-soft:#ECEEEA;
+    --success:#1E8A5B;
+    --success-bg:#E8F5EE;
+    --r-sm:8px;
+    --r-md:14px;
+    --r-lg:22px;
+    --shadow:0 1px 2px rgba(15,36,56,0.06), 0 8px 24px rgba(15,36,56,0.06);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4,.disp{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  img{max-width:100%;display:block;}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+  ::selection{background:var(--gold);color:#fff;}
+
+  /* Header */
+  header.site{position:sticky;top:0;z-index:50;background:var(--navy-deep);}
+  .header-row{display:flex;align-items:center;justify-content:space-between;height:72px;}
+  .logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:19px;}
+  .logo .mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--gold),var(--gold-deep));display:flex;align-items:center;justify-content:center;color:var(--navy-deep);font-size:16px;}
+  nav.main-nav{display:flex;gap:28px;}
+  nav.main-nav a{color:rgba(255,255,255,0.75);font-size:14.5px;font-weight:500;transition:color .15s;}
+  nav.main-nav a:hover{color:#fff;}
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:14.5px;font-weight:600;transition:transform .1s, background .15s, box-shadow .15s;}
+  .btn:active{transform:scale(0.98);}
+  .btn-gold{background:var(--gold);color:var(--navy-deep);}
+  .btn-gold:hover{background:var(--gold-deep);}
+  .btn-ghost-dark{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.25);}
+  .btn-ghost-dark:hover{border-color:rgba(255,255,255,0.5);}
+  .btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--border);}
+  .btn-outline:hover{border-color:var(--navy);}
+  .btn-primary{background:var(--navy);color:#fff;}
+  .btn-primary:hover{background:var(--navy-deep);}
+  .btn-text{background:none;color:var(--teal);font-weight:600;padding:6px 4px;}
+  .link-plain{color:rgba(255,255,255,0.85);font-size:14px;font-weight:600;}
+  .burger{display:none;background:none;border:none;color:#fff;font-size:24px;}
+
+  /* Hero */
+  .hero{background:radial-gradient(1200px 500px at 15% -10%, rgba(217,154,63,0.18), transparent), var(--navy);padding:56px 0 190px;position:relative;overflow:hidden;}
+  .hero:after{content:"";position:absolute;inset:0;background-image:radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.25) 1px, transparent 0),radial-gradient(1px 1px at 60% 15%, rgba(255,255,255,.18) 1px, transparent 0),radial-gradient(1px 1px at 80% 55%, rgba(255,255,255,.2) 1px, transparent 0);opacity:.6;pointer-events:none;}
+  .hero h1{color:#fff;font-size:44px;line-height:1.08;margin:0 0 14px;max-width:640px;}
+  .hero p{color:rgba(255,255,255,0.72);font-size:16.5px;max-width:520px;margin:0;}
+  .hero-inner{position:relative;z-index:2;}
+
+  .hc-badge{display:inline-block;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.3);font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:6px;margin-bottom:9px;color:#fff;}
+
+  /* Search card */
+  .search-card{background:var(--surface);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(8,26,44,0.28);margin-top:-130px;position:relative;z-index:5;padding:22px;}
+  .trip-tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;}
+  .trip-tab.manage-tab{margin-left:auto;color:var(--teal);border-color:var(--border);background:#F3F9FA;}
+  .trip-tab.manage-tab:hover{border-color:var(--teal);}
+  .trip-tab{padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:#fff;color:var(--ink-soft);font-size:13.5px;font-weight:600;}
+  .trip-tab.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .search-grid{display:grid;grid-template-columns:1.3fr 1.3fr 1fr 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r-md);overflow:visible;position:relative;}
+  .search-grid.oneway{grid-template-columns:1.3fr 1.3fr 1fr 1fr 1fr;}
+  .field{padding:12px 16px;border-right:1px solid var(--border-soft);position:relative;cursor:pointer;}
+  .field:last-child{border-right:none;}
+  .field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-faint);font-weight:600;margin-bottom:4px;}
+  .field .value{font-size:15.5px;font-weight:600;color:var(--ink);}
+  .field .sub{font-size:12.5px;color:var(--ink-faint);margin-top:1px;}
+  .swap-btn{position:absolute;right:-17px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--border);z-index:9;box-shadow:var(--shadow);color:var(--navy);font-size:15px;display:flex;align-items:center;justify-content:center;transition:transform .35s ease;}
+  .swap-btn.spin{transform:translateY(-50%) rotate(180deg);}
+  .mc-fields .swap-btn.spin{transform:rotate(180deg);}
+
+  /* Multi-city (Singapore Airlines-style segment builder) */
+  .mc-segments{display:flex;flex-direction:column;gap:12px;margin-bottom:14px;}
+  .mc-row{display:flex;align-items:center;gap:12px;}
+  .mc-num{width:64px;flex-shrink:0;font-size:12.5px;font-weight:700;color:var(--ink-faint);}
+  .mc-route-preview{display:block;font-size:11px;color:var(--navy);font-weight:700;margin-top:2px;}
+  .mc-fields{display:grid;grid-template-columns:1fr auto 1fr 0.8fr;gap:0;border:1px solid var(--border);border-radius:var(--r-md);flex:1;align-items:stretch;}
+  .mc-fields .field{border-right:1px solid var(--border-soft);}
+  .mc-fields .field:last-child{border-right:none;}
+  .mc-fields .swap-btn{border-radius:0;background:var(--bg);border:none;border-right:1px solid var(--border-soft);width:44px;box-shadow:none;position:static;transform:none;}
+  .mc-remove{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:#fff;color:var(--coral);font-size:14px;flex-shrink:0;}
+  .mc-remove:hover{border-color:var(--coral);}
+  .mc-add-row{margin-bottom:18px;}
+  .mc-max-note{font-size:12.5px;color:var(--ink-faint);}
+  .mc-bottom-row{display:flex;gap:14px;align-items:flex-end;}
+  .field.return-disabled .value{color:var(--ink-faint);}
+  .search-cta-row{display:flex;justify-content:flex-end;margin-top:16px;}
+  .inline-warn{color:var(--coral);font-size:13px;font-weight:600;display:flex;align-items:center;margin-right:auto;}
+  .btn-search{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:var(--navy-deep);padding:14px 30px;border-radius:12px;font-size:15.5px;font-weight:700;display:flex;align-items:center;gap:8px;}
+
+  /* dropdown panels */
+  .dropdown-panel{position:absolute;top:calc(100% + 10px);left:0;min-width:340px;background:#fff;border:1px solid var(--border);border-radius:var(--r-md);box-shadow:0 18px 40px rgba(8,26,44,0.18);padding:14px;z-index:40;cursor:default;}
+  .dropdown-panel input[type=text]{width:100%;padding:11px 12px;border-radius:9px;border:1.5px solid var(--border);font-size:14.5px;margin-bottom:10px;font-family:inherit;}
+  .dropdown-panel input[type=text]:focus{outline:none;border-color:var(--teal);}
+  .airport-group-label{font-size:11px;text-transform:uppercase;color:var(--ink-faint);font-weight:700;letter-spacing:.04em;margin:10px 0 6px;}
+  .airport-row{display:flex;align-items:center;gap:12px;padding:9px 8px;border-radius:9px;}
+  .airport-row:hover{background:var(--bg);}
+  .airport-code{width:38px;height:30px;border-radius:6px;background:var(--navy);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .airport-name{font-size:14px;font-weight:600;}
+  .airport-loc{font-size:12.5px;color:var(--ink-faint);}
+  .cal-panel{min-width:300px;}
+  .cal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:700;font-size:14.5px;}
+  .cal-nav{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:#fff;color:var(--navy);font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .cal-nav:disabled{opacity:.3;cursor:not-allowed;}
+  .cal-quick{display:flex;gap:6px;margin-bottom:12px;}
+  .cal-quick-chip{flex:1;padding:7px 4px;border-radius:8px;border:1px solid var(--border);background:var(--bg);font-size:12px;font-weight:600;color:var(--navy);}
+  .cal-quick-chip:hover{border-color:var(--teal);}
+  .recent-search-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px;}
+  .recent-search-label{font-size:12.5px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.03em;}
+  .recent-chip{background:#fff;border:1px solid var(--border);border-radius:20px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--navy);}
+  .recent-chip span{font-weight:500;color:var(--ink-faint);}
+  .recent-chip:hover{border-color:var(--navy);}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;}
+  .cal-dow{font-size:11px;color:var(--ink-faint);font-weight:700;padding-bottom:4px;}
+  .cal-day{padding:8px 0;border-radius:8px;font-size:13.5px;font-weight:500;}
+  .cal-day.disabled{color:#D6DAD6;}
+  .cal-day.sel{background:var(--navy);color:#fff;font-weight:700;}
+  .cal-day:not(.disabled):hover{background:var(--bg);}
+  .pax-panel{min-width:290px;}
+  .pax-row{display:flex;justify-content:space-between;align-items:center;padding:10px 2px;border-bottom:1px solid var(--border-soft);}
+  .pax-row:last-of-type{border-bottom:none;}
+  .pax-row .t{font-weight:600;font-size:14.5px;}
+  .pax-row .s{font-size:12px;color:var(--ink-faint);}
+  .stepper{display:flex;align-items:center;gap:12px;}
+  .stepper button{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);background:#fff;font-size:15px;color:var(--navy);}
+  .stepper button:disabled{opacity:.3;cursor:not-allowed;}
+  .stepper .n{width:16px;text-align:center;font-weight:700;}
+  .pax-done{width:100%;margin-top:10px;}
+  .cabin-list{display:flex;flex-direction:column;gap:4px;}
+  .cabin-opt{padding:10px 12px;border-radius:9px;font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;}
+  .cabin-opt:hover{background:var(--bg);}
+  .cabin-opt.sel{background:var(--navy);color:#fff;}
+
+  /* sections below hero */
+  .section{padding:56px 0;}
+  .section h2{font-size:26px;margin:0 0 6px;}
+  .section .lead{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+  .dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .dest-card{border-radius:var(--r-md);overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform .15s, box-shadow .15s;}
+  .dest-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+  .dest-img{height:130px;background:linear-gradient(135deg,var(--teal),var(--navy));display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:700;font-size:15px;}
+  .dest-body{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;}
+  .dest-body .from{font-size:12.5px;color:var(--ink-faint);}
+  .dest-body .price{font-weight:700;color:var(--navy);}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;}
+  .trust-item .icon{width:46px;height:46px;border-radius:12px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:20px;}
+  .trust-item h4{margin:0 0 4px;font-size:14.5px;}
+  .trust-item p{margin:0;font-size:13px;color:var(--ink-soft);}
+  footer.site{background:var(--navy-deep);color:rgba(255,255,255,0.65);padding:44px 0 26px;font-size:13.5px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:24px;margin-bottom:30px;}
+  .footer-grid h5{color:#fff;font-size:13px;margin:0 0 12px;letter-spacing:.03em;}
+  .footer-grid a{display:block;color:rgba(255,255,255,0.6);margin-bottom:9px;}
+  .footer-grid a:hover{color:#fff;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:18px;display:flex;justify-content:space-between;}
+
+  /* Results page */
+  .results-page{padding-bottom:70px;}
+  .summary-bar{background:var(--navy);color:#fff;padding:16px 0;}
+  .summary-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .summary-route{font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;}
+  .summary-meta{font-size:13px;color:rgba(255,255,255,0.7);margin-top:2px;}
+  .results-body{display:grid;grid-template-columns:270px 1fr;gap:26px;margin-top:26px;align-items:start;}
+  .filter-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:18px;position:sticky;top:90px;}
+  .filter-panel h4{margin:18px 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-faint);}
+  .filter-panel h4:first-child{margin-top:0;}
+  .filter-panel .clear{color:var(--teal);font-size:13px;font-weight:700;float:right;text-transform:none;letter-spacing:0;}
+  .chk-row{display:flex;align-items:center;gap:9px;padding:6px 0;font-size:14px;}
+  .chk-row input{width:16px;height:16px;accent-color:var(--navy);}
+  .range-row{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);margin-bottom:6px;}
+  input[type=range]{width:100%;accent-color:var(--navy);}
+  .timepill-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .timepill{padding:7px 12px;border-radius:16px;border:1px solid var(--border);font-size:12.5px;font-weight:600;background:#fff;}
+  .timepill.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  .sort-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .found-count{font-weight:700;font-size:15px;}
+  .sort-tabs{display:flex;gap:6px;}
+  .sort-tab{padding:8px 14px;border-radius:18px;border:1px solid var(--border);background:#fff;font-size:13px;font-weight:600;color:var(--ink-soft);}
+  .sort-tab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  .badge-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px;}
+  .badge-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px 16px;cursor:pointer;transition:border-color .15s;}
+  .badge-card:hover{border-color:var(--navy);}
+  .badge-card .tag{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+  .tag-best{background:#FDF1DF;color:var(--gold-deep);}
+  .tag-cheap{background:var(--success-bg);color:var(--success);}
+  .tag-fast{background:#EAF3F8;color:var(--teal);}
+  .badge-card .al{font-weight:700;font-size:14.5px;margin-bottom:2px;}
+  .badge-card .pr{font-size:18px;font-weight:700;color:var(--navy);}
+  .badge-card .meta{font-size:12.5px;color:var(--ink-faint);margin-top:4px;}
+
+  .flight-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:18px 20px;margin-bottom:14px;}
+  .flight-top{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .airline-block{display:flex;align-items:center;gap:12px;min-width:150px;}
+  .airline-logo{width:38px;height:38px;border-radius:9px;background:var(--navy);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .airline-name{font-weight:700;font-size:14.5px;}
+  .flight-no{font-size:12px;color:var(--ink-faint);}
+  .route-block{display:flex;align-items:center;gap:18px;flex:1;justify-content:center;}
+  .rb-time{text-align:center;}
+  .rb-time .t{font-size:19px;font-weight:700;}
+  .rb-time .c{font-size:12.5px;color:var(--ink-faint);}
+  .rb-mid{text-align:center;min-width:110px;}
+  .rb-mid .dur{font-size:12.5px;color:var(--ink-soft);font-weight:600;}
+  .rb-line{height:1px;background:var(--border);position:relative;margin:6px 0;}
+  .rb-line .dot{position:absolute;top:-3px;width:7px;height:7px;border-radius:50%;background:var(--ink-faint);}
+  .rb-stops{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;}
+  .rb-stops.direct{color:var(--success);}
+  .rb-stops.stop{color:var(--coral);}
+  .price-block{text-align:right;min-width:130px;}
+  .price-block .p{font-size:21px;font-weight:700;color:var(--navy);}
+  .price-block .pp{font-size:11.5px;color:var(--ink-faint);}
+  .flight-actions{display:flex;gap:8px;margin-top:6px;justify-content:flex-end;}
+  .baggage-row{display:flex;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border-soft);font-size:13px;color:var(--ink-soft);}
+  .baggage-row span{display:flex;align-items:center;gap:6px;}
+  .flight-details{margin-top:14px;padding-top:14px;border-top:1px dashed var(--border);display:none;}
+  .flight-details.open{display:block;}
+  .segment{display:grid;grid-template-columns:70px 1fr;gap:14px;margin-bottom:4px;}
+  .seg-time{font-weight:700;font-size:14.5px;}
+  .seg-body{border-left:2px solid var(--border);padding:2px 0 16px 16px;position:relative;}
+  .seg-body:before{content:"";position:absolute;left:-5px;top:2px;width:8px;height:8px;border-radius:50%;background:var(--navy);}
+  .seg-city{font-weight:700;font-size:14.5px;}
+  .seg-sub{font-size:12.5px;color:var(--ink-faint);margin-top:1px;}
+  .transit-note{background:var(--bg);border-radius:8px;padding:8px 12px;font-size:12.5px;color:var(--ink-soft);margin:6px 0 10px 16px;display:inline-block;}
+  .detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px;}
+  .detail-mini h5{margin:0 0 3px;font-size:11.5px;text-transform:uppercase;color:var(--ink-faint);letter-spacing:.03em;}
+  .detail-mini p{margin:0;font-size:14px;font-weight:600;}
+  .fare-breakdown{margin-top:16px;background:var(--bg);border-radius:10px;padding:14px 16px;}
+  .fb-row{display:flex;justify-content:space-between;font-size:13.5px;padding:4px 0;color:var(--ink-soft);}
+  .fb-row.total{border-top:1px solid var(--border);margin-top:6px;padding-top:10px;font-weight:700;color:var(--ink);font-size:15px;}
+
+  /* Booking flow */
+  .flow-page{max-width:920px;margin:0 auto;padding:30px 24px 80px;}
+  .progress{display:flex;justify-content:space-between;margin-bottom:34px;position:relative;}
+  .progress:before{content:"";position:absolute;top:14px;left:5%;right:5%;height:2px;background:var(--border);z-index:0;}
+  .p-step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;}
+  .p-dot{width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;color:var(--ink-faint);}
+  .p-step.done .p-dot{background:var(--success);border-color:var(--success);color:#fff;}
+  .p-step.active .p-dot{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .p-label{font-size:11.5px;color:var(--ink-faint);font-weight:600;}
+  .p-step.active .p-label{color:var(--navy);font-weight:700;}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:22px;margin-bottom:18px;}
+  .card h3{margin:0 0 4px;font-size:17px;}
+  .card .card-sub{font-size:13px;color:var(--ink-faint);margin-bottom:16px;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .form-grid.g3{grid-template-columns:1fr 1fr 1fr;}
+  .fg{display:flex;flex-direction:column;gap:6px;}
+  .fg label{font-size:12.5px;font-weight:600;color:var(--ink-soft);}
+  .fg input, .fg select{padding:11px 12px;border-radius:9px;border:1.5px solid var(--border);font-size:14.5px;font-family:inherit;background:#fff;}
+  .fg input:focus, .fg select:focus{outline:none;border-color:var(--teal);}
+  .fg .err{font-size:12px;color:var(--coral);display:none;}
+  .fg.invalid input, .fg.invalid select{border-color:var(--coral);}
+  .fg.invalid .err{display:block;}
+  .pax-badge{display:inline-block;background:var(--bg);border-radius:6px;padding:2px 9px;font-size:11.5px;font-weight:700;color:var(--ink-soft);margin-left:8px;}
+  .review-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border-soft);font-size:14px;}
+  .review-row:last-child{border-bottom:none;}
+  .review-row .k{color:var(--ink-faint);font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;font-weight:700;}
+  .edit-link{color:var(--teal);font-size:13px;font-weight:700;}
+  .pay-methods{display:flex;gap:10px;margin-bottom:18px;}
+  .pay-method{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:14px;text-align:center;font-weight:600;font-size:13.5px;}
+  .pay-method.sel{border-color:var(--navy);background:var(--bg);}
+  .sticky-cta{position:sticky;bottom:0;background:rgba(245,246,243,0.95);backdrop-filter:blur(6px);padding:16px 0;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);margin-top:10px;}
+  .sticky-cta .amt{font-size:20px;font-weight:700;}
+  .sticky-cta .amt span{display:block;font-size:11.5px;color:var(--ink-faint);font-weight:600;}
+
+  .confirm-hero{text-align:center;padding:20px 0 8px;}
+  .confirm-check{width:64px;height:64px;border-radius:50%;background:var(--success-bg);color:var(--success);font-size:30px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+  .ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+  .ref-box{background:var(--bg);border-radius:10px;padding:14px;text-align:center;}
+  .ref-box .l{font-size:11.5px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.04em;font-weight:700;}
+  .ref-box .v{font-size:19px;font-weight:700;margin-top:3px;letter-spacing:.03em;}
+  .confirm-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px;}
+
+  /* AI assistant */
+  .ai-fab{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;border:none;border-radius:30px;padding:14px 20px;display:flex;align-items:center;gap:9px;font-weight:700;font-size:14.5px;box-shadow:0 12px 28px rgba(8,26,44,0.35);z-index:80;}
+  .ai-panel{position:fixed;bottom:88px;right:24px;width:360px;max-width:90vw;background:#fff;border-radius:18px;box-shadow:0 24px 60px rgba(8,26,44,0.3);z-index:81;display:none;flex-direction:column;overflow:hidden;border:1px solid var(--border);}
+  .ai-panel.open{display:flex;}
+  .ai-head{background:var(--navy);color:#fff;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;}
+  .ai-head .t{font-weight:700;font-size:14.5px;}
+  .ai-head .s{font-size:11.5px;color:rgba(255,255,255,0.6);}
+  .ai-body{padding:16px;height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;background:var(--bg);}
+  .msg{max-width:82%;padding:9px 13px;border-radius:14px;font-size:13.5px;line-height:1.45;}
+  .msg.bot{background:#fff;border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px;}
+  .msg.user{background:var(--navy);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
+  .ai-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 14px;background:var(--bg);}
+  .ai-input-row{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--border);background:#fff;}
+  .ai-input-row input{flex:1;border:1.5px solid var(--border);border-radius:20px;padding:9px 14px;font-size:13px;font-family:inherit;}
+  .ai-input-row input:focus{outline:none;border-color:var(--teal);}
+  .ai-input-row button{background:var(--navy);color:#fff;border:none;width:34px;height:34px;border-radius:50%;flex-shrink:0;font-size:14px;}
+  .fare-compare-table{width:100%;border-collapse:collapse;margin-top:8px;}
+  .fare-compare-table td{padding:7px 4px;font-size:12.5px;border-bottom:1px solid var(--border-soft);}
+  .fare-compare-table tr.lowest td{font-weight:700;color:var(--success);}
+  .lowest-badge{font-size:10.5px;font-weight:700;color:var(--success);margin-top:3px;}
+  .qchip{background:#fff;border:1px solid var(--border);border-radius:16px;padding:7px 12px;font-size:12px;font-weight:600;color:var(--navy);}
+  .ai-note{font-size:11px;color:var(--ink-faint);padding:10px 16px;background:#fff;border-top:1px solid var(--border);text-align:center;}
+
+  /* toast */
+  #toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:10px;font-size:13.5px;font-weight:600;z-index:200;opacity:0;pointer-events:none;transition:all .25s;box-shadow:0 10px 30px rgba(0,0,0,0.25);}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  /* misc */
+  .hide{display:none !important;}
+  .badge-scope{display:inline-block;background:#FDF1DF;color:var(--gold-deep);font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;margin-left:8px;vertical-align:middle;}
+
+  /* Account menu + mobile nav */
+  .acct-wrap{position:relative;}
+  .acct-btn{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);color:#fff;border-radius:10px;padding:8px 14px;font-weight:600;font-size:13.5px;}
+  .acct-avatar{width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy-deep);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .acct-menu{position:absolute;top:calc(100% + 10px);right:0;background:#fff;border-radius:12px;box-shadow:0 18px 40px rgba(8,26,44,0.2);border:1px solid var(--border);min-width:180px;overflow:hidden;z-index:60;}
+  .acct-menu a, .acct-menu button{display:block;width:100%;text-align:left;padding:11px 16px;font-size:14px;font-weight:600;color:var(--ink);background:none;border:none;}
+  .acct-menu a:hover, .acct-menu button:hover{background:var(--bg);}
+  nav.main-nav a.active{color:#fff;}
+  .mobile-nav-sheet{position:fixed;inset:0;background:rgba(8,20,33,0.55);z-index:95;display:none;}
+  .mobile-nav-sheet.open{display:block;}
+  .mobile-nav-panel{position:absolute;top:0;right:0;bottom:0;width:78%;max-width:320px;background:#fff;padding:20px;display:flex;flex-direction:column;}
+  .mobile-nav-panel a, .mobile-nav-panel button.mnav-item{display:block;padding:13px 6px;font-size:15.5px;font-weight:600;color:var(--ink);border-bottom:1px solid var(--border-soft);background:none;border-left:none;border-right:none;border-top:none;text-align:left;width:100%;}
+  .mobile-nav-close{align-self:flex-end;background:none;border:none;font-size:22px;color:var(--ink-faint);margin-bottom:6px;}
+  .mnav-auth{display:flex;gap:8px;margin-top:16px;}
+
+  /* Sub-pages: hotels, visa, services, offers, my booking, help, auth */
+  .page-hero{background:var(--navy);padding:40px 0 34px;color:#fff;}
+  .page-hero h1{font-size:28px;margin:0 0 6px;color:#fff;}
+  .page-hero p{color:rgba(255,255,255,0.7);margin:0;font-size:14.5px;}
+  .page-body{max-width:1180px;margin:0 auto;padding:32px 24px 70px;}
+
+  .hotel-searchbar{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:16px;display:grid;grid-template-columns:1.4fr 1fr 1fr 0.9fr auto;gap:12px;align-items:end;margin-top:-58px;position:relative;z-index:5;box-shadow:var(--shadow);}
+  .hotel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px;}
+  .hotel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;cursor:pointer;transition:transform .15s,box-shadow .15s;}
+  .hotel-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+  .hotel-img{height:150px;background:linear-gradient(135deg,var(--teal),var(--navy-deep));display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:700;}
+  .hotel-body{padding:14px 16px;}
+  .hotel-stars{color:var(--gold-deep);font-size:12.5px;margin-bottom:4px;}
+  .hotel-name{font-weight:700;font-size:15px;margin-bottom:2px;}
+  .hotel-loc{font-size:12.5px;color:var(--ink-faint);margin-bottom:10px;}
+  .hotel-foot{display:flex;justify-content:space-between;align-items:flex-end;}
+  .hotel-price{font-weight:700;color:var(--navy);font-size:16px;}
+  .hotel-price span{display:block;font-weight:500;font-size:11px;color:var(--ink-faint);}
+  .rating-pill{background:var(--success-bg);color:var(--success);font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px;}
+
+  .room-option{border:1.5px solid var(--border);border-radius:12px;padding:16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .room-option.reco{border-color:var(--gold);background:#FFFBF3;}
+  .room-name{font-weight:700;font-size:14.5px;}
+  .room-meta{font-size:12.5px;color:var(--ink-faint);margin-top:3px;}
+
+  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .service-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:22px;}
+  .service-icon{width:44px;height:44px;border-radius:12px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px;}
+  .service-card h3{margin:0 0 6px;font-size:16px;}
+  .service-card p{margin:0 0 16px;font-size:13.5px;color:var(--ink-soft);}
+
+  .offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .offer-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;}
+  .offer-img{height:120px;background:linear-gradient(135deg,var(--coral),var(--gold-deep));display:flex;align-items:flex-start;justify-content:space-between;padding:12px;color:#fff;font-weight:700;}
+  .offer-badge{background:rgba(255,255,255,0.25);font-size:10.5px;padding:3px 8px;border-radius:6px;letter-spacing:.03em;}
+  .offer-body{padding:14px 16px;}
+
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-q{padding:16px 4px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14.5px;cursor:pointer;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .2s ease;font-size:13.5px;color:var(--ink-soft);padding:0 4px;}
+  .faq-item.open .faq-a{max-height:200px;padding-bottom:16px;}
+  .faq-item.open .faq-q .chev{transform:rotate(180deg);}
+  .chev{transition:transform .2s;color:var(--ink-faint);}
+  .support-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px;}
+  .support-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:18px;text-align:center;}
+  .support-card .icon{font-size:22px;margin-bottom:8px;}
+
+  .auth-wrap{max-width:400px;margin:0 auto;}
+  .admin-entry-link{text-align:center;font-size:12.5px;color:var(--ink-faint);margin-top:16px;padding-top:14px;border-top:1px solid var(--border-soft);}
+  .admin-entry-link a{color:var(--teal);font-weight:700;}
+  .demo-cred-box{display:flex;gap:8px;align-items:flex-start;background:#FFFBF3;border:1px solid #F0DDB0;border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--ink-soft);margin:14px 0;line-height:1.5;}
+  .auth-tabs{display:flex;gap:6px;margin-bottom:20px;justify-content:center;}
+  .not-found-box{text-align:center;padding:30px 10px;}
+  .pw-wrap{position:relative;}
+  .pw-wrap input{width:100%;padding-right:44px;}
+  .pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:12.5px;font-weight:700;color:var(--teal);}
+  .pw-meter{display:flex;gap:4px;margin-top:7px;}
+  .pw-meter i{flex:1;height:4px;border-radius:2px;background:var(--border);}
+  .pw-meter i.on1{background:#E15A3C;}
+  .pw-meter i.on2{background:#E3A63F;}
+  .pw-meter i.on3{background:#8BB33F;}
+  .pw-meter i.on4{background:#1E8A5B;}
+  .pw-label{font-size:11.5px;font-weight:700;margin-top:5px;}
+  .pw-reqs{font-size:11.5px;color:var(--ink-faint);margin-top:6px;line-height:1.6;}
+  .pw-reqs .ok{color:var(--success);}
+  .req-star{color:var(--coral);}
+  .security-note{display:flex;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:11.5px;color:var(--ink-soft);margin-top:14px;line-height:1.5;}
+  .captcha-box{display:flex;align-items:center;gap:14px;border:1px solid #d5d9d3;border-radius:10px;background:#fbfbfa;padding:12px 16px;width:100%;user-select:none;}
+  .captcha-box.checked{border-color:var(--success);background:#F3FAF6;}
+  .captcha-checkbox{width:26px;height:26px;border:2px solid #b9beb6;border-radius:5px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:border-color .15s,background .15s;}
+  .captcha-checkbox.checked{border-color:var(--success);background:var(--success);color:#fff;font-weight:700;font-size:15px;}
+  .captcha-spinner{width:16px;height:16px;border:2px solid #d5d9d3;border-top-color:var(--teal);border-radius:50%;animation:captchaspin .7s linear infinite;}
+  @keyframes captchaspin{to{transform:rotate(360deg);}}
+  .captcha-label{font-size:13.5px;font-weight:600;color:#2b2f2c;cursor:pointer;flex:1;}
+  .captcha-brand{text-align:center;font-size:9px;color:#8b9088;line-height:1.25;flex-shrink:0;}
+  .captcha-brand .mark{font-size:16px;line-height:1;}
+  .phone-field{display:flex;gap:8px;}
+  .phone-field select{width:110px;flex-shrink:0;}
+  .chk-row.terms{align-items:flex-start;font-size:12.5px;color:var(--ink-soft);}
+  .chk-row.terms input{margin-top:2px;}
+  .acct-menu-head{padding:12px 16px;border-bottom:1px solid var(--border-soft);}
+  .acct-menu-head .n{font-weight:700;font-size:14px;}
+  .acct-menu-head .e{font-size:12px;color:var(--ink-faint);}
+  .profile-card{display:flex;align-items:center;gap:14px;}
+  .profile-avatar{width:52px;height:52px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .profile-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin-top:14px;}
+  .profile-fields .k{font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-faint);font-weight:700;}
+  .profile-fields .v{font-size:14px;font-weight:600;margin-top:2px;}
+
+  /* Admin Dashboard shell */
+  .admin-shell{display:flex;min-height:calc(100vh - 72px);}
+  .admin-sidebar{width:220px;flex-shrink:0;background:var(--navy-deep);color:#fff;padding:18px 0;}
+  .admin-sidebar-head{padding:0 18px 18px;font-size:12.5px;font-weight:700;letter-spacing:.03em;color:rgba(255,255,255,0.6);border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:10px;}
+  .admin-sidebar-head span{color:#fff;font-size:15px;display:block;margin-top:2px;}
+  .admin-nav-item{display:block;width:100%;text-align:left;background:none;border:none;color:rgba(255,255,255,0.75);padding:11px 18px;font-size:13.5px;font-weight:600;}
+  .admin-nav-item:hover{background:rgba(255,255,255,0.06);color:#fff;}
+  .admin-nav-item.active{background:rgba(255,255,255,0.1);color:#fff;border-right:3px solid var(--gold);}
+  .admin-main{flex:1;background:var(--bg);min-width:0;}
+  .admin-topbar{background:#fff;border-bottom:1px solid var(--border);padding:16px 28px;display:flex;justify-content:space-between;align-items:center;}
+  .admin-content{padding:24px 28px 60px;max-width:1000px;}
+  .admin-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+  .admin-stat-card{background:#fff;border:1px solid var(--border);border-radius:var(--r-md);padding:16px;}
+  .admin-stat-card .v{font-size:22px;font-weight:700;color:var(--navy);}
+  .admin-stat-card .l{font-size:12px;color:var(--ink-faint);margin-top:2px;}
+  .mini-chart{display:flex;gap:24px;align-items:flex-end;height:120px;margin-top:14px;padding-top:10px;}
+  .mini-bar-wrap{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;width:60px;}
+  .mini-bar{width:32px;background:linear-gradient(180deg,var(--teal),var(--navy));border-radius:6px 6px 0 0;min-height:4px;}
+  .mini-bar-label{font-size:11px;color:var(--ink-faint);margin-top:6px;}
+  .partner-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-soft);}
+  .partner-row:last-child{border-bottom:none;}
+  .btn-text{background:none;border:none;color:var(--teal);font-weight:700;font-size:12px;padding:0 0 0 6px;}
+
+  /* mobile */
+  .filter-toggle-mobile{display:none;}
+  @media(max-width:920px){
+    nav.main-nav{display:none;}
+    .header-actions .link-plain{display:none;}
+    .burger{display:block;}
+    .hero h1{font-size:32px;}
+    .hero{padding:36px 0 260px;}
+    .search-card{padding:16px;margin-top:-230px;}
+    .search-grid{grid-template-columns:1fr;border:none;gap:10px;}
+    .field{border:1px solid var(--border-soft);border-radius:10px;}
+    .swap-btn{right:14px;top:auto;bottom:-17px;transform:none;}
+    .swap-btn.spin{transform:rotate(180deg);}
+    .dest-grid{grid-template-columns:1fr 1fr;}
+    .trust-grid{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .results-body{grid-template-columns:1fr;}
+    .filter-panel{display:none;position:fixed;inset:0;z-index:90;border-radius:0;overflow-y:auto;}
+    .filter-panel.open{display:block;}
+    .filter-toggle-mobile{display:flex;position:sticky;bottom:16px;margin:16px auto 0;background:var(--navy);color:#fff;border:none;border-radius:24px;padding:12px 22px;font-weight:700;font-size:13.5px;box-shadow:0 10px 26px rgba(8,26,44,0.3);width:fit-content;}
+    .flight-top{flex-wrap:wrap;}
+    .route-block{order:3;width:100%;justify-content:space-between;margin-top:10px;}
+    .price-block{text-align:left;}
+    .form-grid,.form-grid.g3{grid-template-columns:1fr;}
+    .ref-grid{grid-template-columns:1fr;}
+    .confirm-actions{grid-template-columns:1fr;}
+    .badge-strip{grid-template-columns:1fr;}
+    .ai-panel{right:10px;left:10px;width:auto;}
+    .ai-fab{right:16px;}
+    .hotel-searchbar{grid-template-columns:1fr;margin-top:-30px;}
+    .hotel-grid,.service-grid,.offer-grid{grid-template-columns:1fr;}
+    .support-grid{grid-template-columns:1fr 1fr;}
+    .mc-row{flex-direction:column;align-items:stretch;}
+    .mc-fields{grid-template-columns:1fr;border:none;gap:10px;}
+    .mc-fields .field{border:1px solid var(--border-soft);border-radius:10px;}
+    .mc-fields .swap-btn{border-radius:50%;background:#fff;border:1px solid var(--border);width:34px;height:34px;box-shadow:var(--shadow);}
+    .mc-num{width:auto;}
+    .mc-bottom-row{flex-direction:column;align-items:stretch;}
+    .admin-shell{flex-direction:column;}
+    .admin-sidebar{width:100%;padding:10px 0;}
+    .admin-sidebar nav{display:flex;overflow-x:auto;}
+    .admin-nav-item{white-space:nowrap;padding:8px 14px;}
+    .admin-nav-item.active{border-right:none;border-bottom:3px solid var(--gold);}
+    .admin-stat-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+<div id="toast"></div>
+<div id="app"></div>
+<div class="mobile-nav-sheet" id="mobileNavSheet" onclick="if(event.target===this) closeMobileNav()"></div>
+<button class="ai-fab" onclick="toggleAI()">✦ Ask AI</button>
+<div class="ai-panel" id="aiPanel">
+  <div class="ai-head">
+    <div><div class="t">Mohammad Travels AI</div><div class="s">Guided search &amp; price check</div></div>
+    <button onclick="toggleAI()" style="background:none;border:none;color:#fff;font-size:18px;">✕</button>
+  </div>
+  <div class="ai-body" id="aiBody"></div>
+  <div class="ai-quick" id="aiQuick"></div>
+  <div class="ai-input-row">
+    <input type="text" id="aiTextInput" placeholder="Ask about a destination's price…" onkeydown="if(event.key==='Enter') aiSendText();">
+    <button onclick="aiSendText()">➤</button>
+  </div>
+  <div class="ai-note">Demo assistant — price checks here are simulated, not live data pulled from real airline sites. A production build would confirm live prices, availability and PNRs from real systems, never invent them.</div>
+</div>
+
+<script>
+/* ---------------- MOCK DATA ---------------- */
+const AIRPORTS = [
+  {code:'DAC',city:'Dhaka',name:'Hazrat Shahjalal Intl',country:'Bangladesh'},
+  {code:'CGP',city:'Chattogram',name:'Shah Amanat Intl',country:'Bangladesh'},
+  {code:'CXB',city:"Cox's Bazar",name:"Cox's Bazar Airport",country:'Bangladesh'},
+  {code:'SIN',city:'Singapore',name:'Singapore Changi',country:'Singapore'},
+  {code:'DXB',city:'Dubai',name:'Dubai International',country:'UAE'},
+  {code:'BKK',city:'Bangkok',name:'Suvarnabhumi Airport',country:'Thailand'},
+  {code:'KUL',city:'Kuala Lumpur',name:'KL International',country:'Malaysia'},
+  {code:'JED',city:'Jeddah',name:'King Abdulaziz Intl',country:'Saudi Arabia'},
+  {code:'RUH',city:'Riyadh',name:'King Khalid Intl',country:'Saudi Arabia'},
+  {code:'DEL',city:'Delhi',name:'Indira Gandhi Intl',country:'India'},
+  {code:'CCU',city:'Kolkata',name:'Netaji Subhas Chandra Bose',country:'India'},
+  {code:'DOH',city:'Doha',name:'Hamad International',country:'Qatar'},
+  {code:'LHR',city:'London',name:'Heathrow Airport',country:'United Kingdom'},
+  {code:'IST',city:'Istanbul',name:'Istanbul Airport',country:'Türkiye'},
+];
+/* Real Asian & Middle East airlines used to populate mock flight search
+   results, replacing the earlier fictional placeholder names (Meridian Air,
+   etc.) per request. IMPORTANT — same caveat as everywhere else in this
+   prototype: the specific flight numbers, times, and prices attached to
+   these real airlines below are simulated for this demo, not live data
+   pulled from the airlines themselves. Real IATA codes are used (via
+   AIRLINE_IATA) rather than auto-generated initials, so a real airline
+   is never shown next to a code that looks wrong or matches a different
+   real carrier. */
+const AIRLINE_IATA = {
+  'Biman Bangladesh Airlines':'BG','US-Bangla Airlines':'BS',
+  'Singapore Airlines':'SQ','Scoot':'TR',
+  'Emirates':'EK','flydubai':'FZ','Etihad Airways':'EY',
+  'Thai Airways':'TG','Bangkok Airways':'PG',
+  'Malaysia Airlines':'MH','AirAsia':'AK',
+  'Saudia':'SV','flynas':'XY','flyadeal':'F3',
+  'Air India':'AI','IndiGo':'6E',
+  'Qatar Airways':'QR','Turkish Airlines':'TK',
+};
+/* Which real airlines plausibly serve each airport in this app's network —
+   used to pick a believable carrier for a given route rather than a random
+   one (e.g. a DAC-SIN search surfaces Biman/US-Bangla and Singapore
+   Airlines/Scoot, not Saudia). */
+const AIRLINE_HUB_POOL = {
+  DAC:['Biman Bangladesh Airlines','US-Bangla Airlines'],
+  CGP:['Biman Bangladesh Airlines','US-Bangla Airlines'],
+  CXB:['Biman Bangladesh Airlines','US-Bangla Airlines'],
+  SIN:['Singapore Airlines','Scoot'],
+  DXB:['Emirates','flydubai'],
+  BKK:['Thai Airways','Bangkok Airways'],
+  KUL:['Malaysia Airlines','AirAsia'],
+  JED:['Saudia','flynas'],
+  RUH:['Saudia','flyadeal'],
+  DEL:['Air India','IndiGo'],
+  CCU:['Air India','IndiGo'],
+  DOH:['Qatar Airways'],
+  LHR:['Biman Bangladesh Airlines','Emirates','Qatar Airways','Turkish Airlines'],
+  IST:['Turkish Airlines'],
+};
+const AIRLINE_FILLERS = ['Emirates','Qatar Airways','Turkish Airlines','Singapore Airlines','Biman Bangladesh Airlines','Etihad Airways'];
+function airlinesForRoute(from,to){
+  const pool = [...new Set([...(AIRLINE_HUB_POOL[from.code]||[]), ...(AIRLINE_HUB_POOL[to.code]||[])])];
+  for(const f of AIRLINE_FILLERS){ if(pool.length>=6) break; if(!pool.includes(f)) pool.push(f); }
+  return pool;
+}
+const COUNTRIES = [
+  {name:'Bangladesh',dial:'+880'},{name:'Singapore',dial:'+65'},{name:'United Arab Emirates',dial:'+971'},
+  {name:'Thailand',dial:'+66'},{name:'Malaysia',dial:'+60'},{name:'Saudi Arabia',dial:'+966'},
+  {name:'India',dial:'+91'},{name:'Qatar',dial:'+974'},{name:'United Kingdom',dial:'+44'},{name:'Türkiye',dial:'+90'},
+];
+function airlineCode(name){return AIRLINE_IATA[name] || name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
+
+function genFlights(from,to){
+  const pool = airlinesForRoute(from,to);
+  const al = i => pool[i % pool.length];
+  const list = [
+    {airline:al(0),num:'403',dep:'10:25',arr:'14:10',durMin:225,stops:0,price:45500,baggage:'30 KG',cabinBag:'7 KG',aircraft:'A350-900',fare:'Standard'},
+    {airline:al(1),num:'118',dep:'06:15',arr:'12:35',durMin:380,stops:1,transitCity:'Kuala Lumpur',transitDur:'2h 15m',price:41800,baggage:'20 KG',cabinBag:'7 KG',aircraft:'B737-800',fare:'Basic'},
+    {airline:al(2),num:'271',dep:'19:40',arr:'23:15',durMin:215,stops:0,price:48900,baggage:'30 KG',cabinBag:'7 KG',aircraft:'A321neo',fare:'Flex'},
+    {airline:al(3),num:'552',dep:'13:05',arr:'20:50',durMin:465,stops:1,transitCity:'Bangkok',transitDur:'3h 05m',price:39200,baggage:'20 KG',cabinBag:'7 KG',aircraft:'B787-9',fare:'Basic'},
+    {airline:al(4),num:'764',dep:'23:50',arr:'04:05',durMin:255,stops:0,price:46700,baggage:'30 KG',cabinBag:'7 KG',aircraft:'A330-300',fare:'Standard'},
+    {airline:al(5),num:'090',dep:'08:30',arr:'12:20',durMin:230,stops:0,price:52300,baggage:'30 KG + Meals',cabinBag:'10 KG',aircraft:'A350-1000',fare:'Flex'},
+    {airline:al(0),num:'411',dep:'16:00',arr:'22:45',durMin:405,stops:1,transitCity:'Dubai',transitDur:'2h 40m',price:43950,baggage:'25 KG',cabinBag:'7 KG',aircraft:'A320neo',fare:'Standard'},
+    {airline:al(2),num:'305',dep:'02:10',arr:'05:55',durMin:225,stops:0,price:44300,baggage:'30 KG',cabinBag:'7 KG',aircraft:'A321neo',fare:'Standard'},
+  ];
+  return list.map((f,i)=>({...f,id:i+1}));
+}
+function fmtDur(min){const h=Math.floor(min/60),m=min%60;return h+'h '+(m<10?'0':'')+m+'m';}
+function fmtMoney(n){return 'BDT ' + n.toLocaleString('en-US');}
+function todayISO(offset){const d=new Date();d.setDate(d.getDate()+offset);return d.toISOString().slice(0,10);}
+function fmtDate(iso){const d=new Date(iso+'T00:00:00');return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});}
+
+/* ---------------- SIMULATED MULTI-SOURCE FARE COMPARISON ----------------
+   IMPORTANT: this does not fetch real prices from any airline or agency
+   website. A static, browser-only page cannot do that — cross-site fetches
+   to arbitrary third-party domains are blocked by the browser (CORS), and
+   most airline sites' terms of service prohibit scraping fares anyway. A
+   real version of this feature needs a server that talks to licensed fare
+   sources (a GDS/NDC API such as Amadeus, Sabre or Travelport, or a
+   metasearch partner API). This function fabricates plausible partner
+   quotes around our own mock price purely to demonstrate the comparison UI. */
+const PARTNER_SOURCES = ['Mohammad Travels (direct)','SkyLink Partners','FareBridge Consolidator','GlobalRoute B2B'];
+/* getActiveSources(): once Mohammad Travels' admin has added real supplier/
+   agency connections (see the Admin Console), the auto-search uses those
+   names instead of the generic placeholder list — so what admin configures
+   is what actually appears to customers as the sourced fares. */
+function getActiveSources(){
+  return state.supplierConnections.length
+    ? ['Mohammad Travels (direct)', ...state.supplierConnections.map(c=>c.name)]
+    : PARTNER_SOURCES;
+}
+function simulateFareComparison(baseFare, seedStr, sources){
+  sources = sources || PARTNER_SOURCES;
+  let seed=0; for(let i=0;i<seedStr.length;i++) seed=(seed*31+seedStr.charCodeAt(i))>>>0;
+  function rand(){ seed=(seed*1103515245+12345)>>>0; return (seed/4294967296); }
+  const rows = sources.map((name,i)=>{
+    const variance = i===0 ? 0 : (rand()*0.09-0.03); // direct price is our real quoted fare
+    const price = Math.round((baseFare*(1+variance))/50)*50;
+    return {name, price};
+  });
+  rows.sort((a,b)=>a.price-b.price);
+  return rows;
+}
+function fareCompareTableHTML(rows){
+  return `<table class="fare-compare-table">
+    ${rows.map((r,i)=>`<tr class="${i===0?'lowest':''}"><td>${i===0?'✓ ':''}${r.name}</td><td style="text-align:right;">${fmtMoney(r.price)}</td></tr>`).join('')}
+  </table>
+  <div style="font-size:10.5px;color:var(--ink-faint);margin-top:6px;">Simulated comparison for this demo — not fetched from real airline or agency websites.</div>`;
+}
+/* autoLowestFlights(): the internal Fare Collection + Pricing Engine.
+   Each flight is priced by (1) simulating a check across connected B2B
+   partners to find the lowest NET fare, then (2) applying Mohammad Travels'
+   configured markup on top. IMPORTANT — the customer-facing side (fl.price)
+   is the selling price ONLY. fl.netFare, fl.markup and fl.supplierName are
+   attached for admin-only use (B2B Partners / Fare Collection / Bookings
+   tabs in the Admin Dashboard) and must never be read by customer-facing
+   rendering code — see the Admin Dashboard section for where they surface. */
+function autoLowestFlights(flights, seedPrefix, fromCode, toCode){
+  const sources = getActiveSources();
+  fromCode = fromCode || state.from.code; toCode = toCode || state.to.code;
+  return flights.map(fl=>{
+    const rows = simulateFareComparison(fl.price, seedPrefix+fl.id, sources);
+    const netFare = rows[0].price;
+    const markup = computeMarkup(netFare, fromCode, toCode, state.cabin);
+    return {...fl, netFare, markup, supplierName: rows[0].name, compareRows: rows, price: netFare+markup};
+  });
+}
+function computeMarkup(netFare, fromCode, toCode, cabin){
+  const r = state.pricingRules;
+  const override = r.overrides.find(o=> (!o.from||o.from===fromCode) && (!o.to||o.to===toCode) && (!o.cabin||o.cabin===cabin) );
+  const rule = override || {type:r.defaultType, value:r.defaultValue};
+  return rule.type==='fixed' ? rule.value : Math.round(netFare*(rule.value/100)/10)*10;
+}
+
+/* ---------------- ADMIN NOTIFICATIONS ----------------
+   Simulates the alert an operations team would receive so ticketing/payment
+   staff can act on a new booking. There is no real backend here, so this
+   writes to an in-memory list and an in-app "Admin console" page — no email,
+   SMS, or webhook is actually sent anywhere. */
+function notifyAdmin(kind, payload){
+  state.adminNotifications.unshift({
+    id:'N'+Math.random().toString(36).slice(2,7).toUpperCase(),
+    time:new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}),
+    kind, ...payload,
+  });
+}
+
+/* ---------------- STATE ---------------- */
+let state = {
+  view:'home',
+  tripType:'roundtrip',
+  from: AIRPORTS[0],
+  to: AIRPORTS[3],
+  departDate: todayISO(30),
+  returnDate: todayISO(37),
+  passengers:{adults:1,children:0,infants:0},
+  cabin:'Economy',
+  openField:null,
+  airportField:null,
+  airportQuery:'',
+  sortBy:'recommended',
+  filters:{stops:new Set(),airlines:new Set(),depTime:new Set(),priceMax:60000},
+  flights:[],
+  expandedFlight:null,
+  selectedFlight:null,
+  passengerForms:[],
+  contact:{email:'',phone:'',code:'+880'},
+  paymentMethod:'card',
+  bookingRef:null,
+  pnr:null,
+  filterSheetOpen:false,
+  errors:{},
+  user:null,
+  acctMenuOpen:false,
+  hotelSearch:{city:'Singapore',checkin:todayISO(30),checkout:todayISO(33),guests:2},
+  selectedHotel:null,
+  hotelBookingRef:null,
+  visaForm:{name:'',email:'',nationality:'',destination:'',date:''},
+  serviceForm:{service:'',name:'',email:'',notes:''},
+  myBookingQuery:{pnr:'',lastName:''},
+  myBookingResult:undefined, // undefined = not searched, null = not found, object = found
+  faqOpen:new Set(),
+  authForm:{name:'',email:'',phone:'',country:'',password:'',confirm:'',agree:false},
+  showPassword:false,
+  showConfirm:false,
+  registeredUsers:[],
+  captcha:{auth:{checked:false,loading:false}, payment:{checked:false,loading:false}, agency:{checked:false,loading:false}, admin:{checked:false,loading:false}},
+  multiSegments:[
+    {from:AIRPORTS[0], to:AIRPORTS[3], date:todayISO(30)},
+    {from:AIRPORTS[3], to:AIRPORTS[6], date:todayISO(34)},
+  ],
+  multiOpenField:null,
+  multiAirportQuery:'',
+  calMonthOffset:0,
+  recentSearches:[],
+  multiFlights:null,
+  multiSelected:[],
+  multiItinerary:null,
+  adminNotifications:[],
+  agencyUser:null,
+  agencyForm:{agencyName:'',iataCode:'',contactPerson:'',email:'',phone:'',password:''},
+  agencyCompare:{fromCode:'DAC',toCode:'SIN',date:todayISO(30),result:null},
+  networkCompare:null,
+  networkCompareOpen:false,
+  supplierConnections:[],
+  supplierForm:{name:'',portalUrl:'',username:'',status:'active',notes:''},
+  pricingRules:{defaultType:'percentage', defaultValue:8, overrides:[]},
+  pricingOverrideForm:{from:'',to:'',cabin:'',type:'percentage',value:5},
+  fareAdjustment:0,
+  fareRevalidation:null,
+  fareSearchCount:0,
+  activityLogs:[],
+  adminAuth:null,
+  adminLoginForm:{email:'',password:''},
+  showAdminPassword:false,
+  adminTab:'dashboard',
+  fareCollectionQuery:{fromCode:'DAC',toCode:'SIN',date:todayISO(30),log:null},
+};
+
+function totalPax(){return state.passengers.adults+state.passengers.children+state.passengers.infants;}
+function paxLabel(){
+  const p=state.passengers; const parts=[];
+  parts.push(p.adults+' Adult'+(p.adults!==1?'s':''));
+  if(p.children) parts.push(p.children+' Child'+(p.children!==1?'ren':''));
+  if(p.infants) parts.push(p.infants+' Infant'+(p.infants!==1?'s':''));
+  return parts.join(' · ');
+}
+function showToast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(window._tt); window._tt=setTimeout(()=>t.classList.remove('show'),2600);
+}
+function render(){
+  const app=document.getElementById('app');
+  if(state.view==='home') app.innerHTML = headerHTML()+homeHTML()+footerHTML();
+  else if(state.view==='results') app.innerHTML = headerHTML()+resultsHTML();
+  else if(state.view==='passengers') app.innerHTML = headerHTML()+flowWrap('passengers',passengersHTML());
+  else if(state.view==='review') app.innerHTML = headerHTML()+flowWrap('review',reviewHTML());
+  else if(state.view==='payment') app.innerHTML = headerHTML()+flowWrap('payment',paymentHTML());
+  else if(state.view==='fareChanged') app.innerHTML = headerHTML()+flowWrap('payment',fareChangedHTML());
+  else if(state.view==='confirmation') app.innerHTML = headerHTML()+flowWrap('confirmation',confirmationHTML());
+  else if(state.view==='multiResults') app.innerHTML = headerHTML()+multiResultsHTML();
+  else if(state.view==='hotels') app.innerHTML = headerHTML()+hotelsHTML()+footerHTML();
+  else if(state.view==='hotelDetail') app.innerHTML = headerHTML()+hotelDetailHTML()+footerHTML();
+  else if(state.view==='visa') app.innerHTML = headerHTML()+visaHTML()+footerHTML();
+  else if(state.view==='travelServices') app.innerHTML = headerHTML()+travelServicesHTML()+footerHTML();
+  else if(state.view==='offers') app.innerHTML = headerHTML()+offersHTML()+footerHTML();
+  else if(state.view==='myBooking') app.innerHTML = headerHTML()+myBookingHTML()+footerHTML();
+  else if(state.view==='help') app.innerHTML = headerHTML()+helpHTML()+footerHTML();
+  else if(state.view==='adminPortalLogin') app.innerHTML = headerHTML()+adminPortalLoginHTML()+footerHTML();
+  else if(state.view==='adminDashboard') app.innerHTML = headerHTML()+adminDashboardHTML();
+  else if(state.view==='agencyLogin') app.innerHTML = headerHTML()+agencyLoginHTML()+footerHTML();
+  else if(state.view==='agencyDashboard') app.innerHTML = headerHTML()+agencyDashboardHTML()+footerHTML();
+  else if(state.view==='login') app.innerHTML = headerHTML()+authHTML('login')+footerHTML();
+  else if(state.view==='register') app.innerHTML = headerHTML()+authHTML('register')+footerHTML();
+  renderMobileNav();
+  attachOutsideClick();
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+/* ---------------- HEADER / FOOTER ---------------- */
+const NAV_ITEMS=[['home','Flights'],['hotels','Hotels'],['visa','Visa'],['travelServices','Travel Services'],['offers','Offers'],['myBooking','My Booking'],['help','Help']];
+function navigate(view){
+  state.view=view; state.acctMenuOpen=false; state.errors={};
+  if(view==='login'||view==='register'){ state.captcha.auth={checked:false,loading:false}; }
+  if(view==='agencyLogin'){ state.captcha.agency={checked:false,loading:false}; }
+  if(view==='adminPortalLogin'){ state.captcha.admin={checked:false,loading:false}; }
+  if(view==='myBooking'){ state.myBookingResult=undefined; }
+  render();
+  return false;
+}
+function headerHTML(){
+  return `
+  <header class="site">
+    <div class="container header-row">
+      <a href="#" class="logo" onclick="return goHome(event)" style="cursor:pointer;"><div class="mark">MT</div>MOHAMMAD TRAVELS</a>
+      <nav class="main-nav">
+        ${NAV_ITEMS.map(([v,label])=>`<a href="#" class="${state.view===v?'active':''}" onclick="return navigate('${v}')">${label}</a>`).join('')}
+      </nav>
+      <div class="header-actions">
+        ${state.user ? `
+          <div class="acct-wrap">
+            <button class="acct-btn" onclick="event.stopPropagation();state.acctMenuOpen=!state.acctMenuOpen;render();">
+              <span class="acct-avatar">${state.user.name[0].toUpperCase()}</span> ${state.user.name.split(' ')[0]}
+            </button>
+            ${state.acctMenuOpen?`<div class="acct-menu" onclick="event.stopPropagation()">
+              <div class="acct-menu-head"><div class="n">${state.user.name}</div><div class="e">${state.user.email}</div></div>
+              <a href="#" onclick="return navigate('myBooking')">My bookings &amp; profile</a>
+              <a href="#" onclick="event.preventDefault();showToast('Saved passengers require account backend')">Saved passengers</a>
+              <button onclick="logoutUser()">Log out</button>
+            </div>`:''}
+          </div>
+        ` : `
+          <button class="btn btn-ghost-dark" onclick="return navigate('login')" style="color:#fff;">Log in</button>
+        `}
+        <button class="btn btn-gold" onclick="return goHome(event)">Book a flight</button>
+        <button class="burger" onclick="openMobileNav()">☰</button>
+      </div>
+    </div>
+  </header>`;
+}
+function openMobileNav(){ document.getElementById('mobileNavSheet').classList.add('open'); }
+function closeMobileNav(){ document.getElementById('mobileNavSheet').classList.remove('open'); }
+function renderMobileNav(){
+  const el=document.getElementById('mobileNavSheet');
+  el.innerHTML = `<div class="mobile-nav-panel">
+    <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+    ${NAV_ITEMS.map(([v,label])=>`<button class="mnav-item" onclick="closeMobileNav();navigate('${v}')">${label}</button>`).join('')}
+    ${state.user ? `<button class="mnav-item" onclick="closeMobileNav();logoutUser()">Log out (${state.user.name.split(' ')[0]})</button>`
+      : `<div class="mnav-auth"><button class="btn btn-primary" style="flex:1;" onclick="closeMobileNav();navigate('login')">Log in</button></div>`}
+  </div>`;
+}
+function footerHTML(){
+  return `
+  <footer class="site">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo" style="margin-bottom:10px;">MOHAMMAD TRAVELS</div>
+          <p style="max-width:280px;color:rgba(255,255,255,0.55);">Search, compare and book flights across our airline partners — simply and transparently.</p>
+        </div>
+        <div><h5>Explore</h5><a href="#" onclick="return goHome(event)">Flights</a><a href="#" onclick="return navigate('hotels')">Hotels</a><a href="#" onclick="return navigate('visa')">Visa</a><a href="#" onclick="return navigate('offers')">Popular destinations</a></div>
+        <div><h5>Support</h5><a href="#" onclick="return navigate('myBooking')">My booking</a><a href="#" onclick="event.preventDefault();showToast('Contact form requires a helpdesk integration')">Contact us</a><a href="#" onclick="return navigate('help')">Help centre</a><a href="#" onclick="event.preventDefault();showToast('WhatsApp Business integration required')">WhatsApp</a></div>
+        <div><h5>Policies</h5><a href="#" onclick="event.preventDefault();showToast('Legal pages are not in this prototype')">Terms &amp; conditions</a><a href="#" onclick="event.preventDefault();showToast('Legal pages are not in this prototype')">Privacy policy</a><a href="#" onclick="event.preventDefault();showToast('Legal pages are not in this prototype')">Refund policy</a><a href="#" onclick="event.preventDefault();showToast('Legal pages are not in this prototype')">Booking conditions</a></div>
+        <div><h5>Business</h5><a href="#" onclick="return navigate('${state.agencyUser?'agencyDashboard':'agencyLogin'}')">Travel agent login</a><a href="#" onclick="event.preventDefault();goAdminDashboard();">${state.adminAuth?'Admin Dashboard':'Admin Portal'}</a></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Mohammad Travels. Prototype build.</span><span>DAC · SIN · DXB · BKK · KUL</span></div>
+    </div>
+  </footer>`;
+}
+
+/* ---------------- HOME / SEARCH ---------------- */
+function homeHTML(){
+  const p=state.passengers;
+  return `
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1>Where will you fly next?</h1>
+      <p>Compare flights, find the best fares, and book your journey with Mohammad Travels.</p>
+    </div>
+  </section>
+  <div class="container">
+    <div class="search-card">
+      <div class="trip-tabs">
+        <button class="trip-tab ${state.tripType==='oneway'?'active':''}" onclick="setTripType('oneway')">One way</button>
+        <button class="trip-tab ${state.tripType==='roundtrip'?'active':''}" onclick="setTripType('roundtrip')">Round trip</button>
+        <button class="trip-tab ${state.tripType==='multicity'?'active':''}" onclick="setTripType('multicity')">Multi-city</button>
+        <button class="trip-tab manage-tab" onclick="return navigate('myBooking')">🎫 Manage booking</button>
+      </div>
+      ${state.tripType==='multicity' ? multiCitySearchHTML() : searchGridHTML()}
+    </div>
+    ${state.tripType!=='multicity' && state.recentSearches.length ? recentSearchesHTML() : ''}
+  </div>
+  ${state.tripType!=='multicity' ? `
+  <section class="section">
+    <div class="container">
+      <h2>Popular destinations</h2>
+      <p class="lead">Fares shown are illustrative — connect a live fare feed to display real prices.</p>
+      <div class="dest-grid">
+        ${destinations().map(d=>`
+          <div class="dest-card" onclick="pickDestination('${d.code}')">
+            <div class="dest-img">${d.city}</div>
+            <div class="dest-body"><div><div class="from">from ${state.from.city}</div><div class="price">${fmtMoney(d.price)}</div></div><button class="btn btn-outline" style="padding:7px 12px;font-size:13px;">Search</button></div>
+          </div>`).join('')}
+      </div>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <h2>Why book with us</h2>
+      <div class="trust-grid">
+        <div class="trust-item"><div class="icon">🔒</div><h4>Secure booking</h4><p>Payments handled by trusted processors</p></div>
+        <div class="trust-item"><div class="icon">💳</div><h4>Transparent pricing</h4><p>Taxes and fees shown before checkout</p></div>
+        <div class="trust-item"><div class="icon">🎧</div><h4>Real support</h4><p>Chat, WhatsApp, call or email us</p></div>
+        <div class="trust-item"><div class="icon">✈️</div><h4>Multiple airlines</h4><p>Compare fares across airline partners</p></div>
+      </div>
+    </div>
+  </section>` : ''}
+  `;
+}
+function multiCitySearchHTML(){
+  const segs = state.multiSegments;
+  return `
+  <div class="mc-segments">
+    ${segs.map((seg,i)=>multiSegmentRow(seg,i)).join('')}
+  </div>
+  <div class="mc-add-row">
+    ${segs.length<6 ? `<button class="btn btn-outline" onclick="addMultiSegment()">+ Add another flight</button>` : `<span class="mc-max-note">Maximum 6 flights per search</span>`}
+  </div>
+  <div class="mc-bottom-row">
+    <div class="field" style="border:1px solid var(--border-soft);border-radius:10px;flex:1;" onclick="openField(event,'pax')">
+      <label>Passengers &amp; class</label>
+      <div class="value">${totalPax()} ${totalPax()===1?'Traveller':'Travellers'}</div>
+      <div class="sub">${state.cabin}</div>
+      ${state.openField==='pax'?paxDropdown():''}
+    </div>
+    <button class="btn-search" onclick="doMultiSearch()">🔍 Search flights</button>
+  </div>`;
+}
+function multiSegmentRow(seg,i){
+  const openKey = state.multiOpenField;
+  const minDate = i===0 ? todayISO(0) : state.multiSegments[i-1].date;
+  const sameCity = seg.from.code===seg.to.code;
+  return `<div class="mc-row">
+    <div class="mc-num">Flight ${i+1} <span class="mc-route-preview">${seg.from.code} → ${seg.to.code}</span></div>
+    <div class="mc-fields">
+      <div class="field" onclick="openMultiField(event,'${i}-from')">
+        <label>From</label>
+        <div class="value">${seg.from.city} <span style="color:var(--ink-faint);font-weight:500;">(${seg.from.code})</span></div>
+        ${openKey===i+'-from'?multiAirportDropdown(i,'from'):''}
+      </div>
+      <button class="swap-btn" style="position:static;margin:0 auto;" onclick="swapMultiSegment(event,${i})" title="Swap">⇄</button>
+      <div class="field" onclick="openMultiField(event,'${i}-to')">
+        <label>To</label>
+        <div class="value">${seg.to.city} <span style="color:var(--ink-faint);font-weight:500;">(${seg.to.code})</span></div>
+        ${openKey===i+'-to'?multiAirportDropdown(i,'to'):''}
+      </div>
+      <div class="field" onclick="openMultiField(event,'${i}-date')">
+        <label>Date</label>
+        <div class="value">${fmtDate(seg.date)}</div>
+        ${openKey===i+'-date'?multiCalendarDropdown(i,minDate):''}
+      </div>
+    </div>
+    ${removeButtonHTML(i)}
+  </div>
+  ${sameCity ? `<div class="inline-warn" style="margin:-6px 0 6px 76px;">⚠ From and To can't be the same for flight ${i+1}</div>` : ''}`;
+}
+function removeButtonHTML(i){
+  return state.multiSegments.length>2 ? `<button class="mc-remove" onclick="removeMultiSegment(${i})" title="Remove flight">✕</button>` : '';
+}
+function openMultiField(e,key){ e.stopPropagation(); state.multiAirportQuery=''; state.calMonthOffset=0; state.multiOpenField = state.multiOpenField===key?null:key; render(); }
+function multiAirportListHTML(i,which){
+  const q=state.multiAirportQuery.toLowerCase();
+  const results = q ? AIRPORTS.filter(a=>a.city.toLowerCase().includes(q)||a.code.toLowerCase().includes(q)||a.country.toLowerCase().includes(q)||a.name.toLowerCase().includes(q)) : null;
+  return `${results ? (results.length? results.map(a=>`<div class="airport-row" onclick="selectMultiAirport(${i},'${which}','${a.code}')"><div class="airport-code">${a.code}</div><div><div class="airport-name">${a.city}, ${a.country}</div><div class="airport-loc">${a.name}</div></div></div>`).join('') : '<div style="padding:10px;color:var(--ink-faint);font-size:13.5px;">No matches</div>')
+  : AIRPORTS.slice(0,6).map(a=>`<div class="airport-row" onclick="selectMultiAirport(${i},'${which}','${a.code}')"><div class="airport-code">${a.code}</div><div><div class="airport-name">${a.city}, ${a.country}</div><div class="airport-loc">${a.name}</div></div></div>`).join('')}`;
+}
+function multiAirportDropdown(i,which){
+  return `<div class="dropdown-panel" onclick="event.stopPropagation()">
+    <input type="text" placeholder="City or airport" value="${state.multiAirportQuery}" oninput="state.multiAirportQuery=this.value;updateMultiAirportList(${i},'${which}');" autofocus>
+    <div id="multiAirportListBody">${multiAirportListHTML(i,which)}</div>
+  </div>`;
+}
+function updateMultiAirportList(i,which){
+  const el=document.getElementById('multiAirportListBody');
+  if(el) el.innerHTML = multiAirportListHTML(i,which);
+}
+function selectMultiAirport(i,which,code){
+  const a=AIRPORTS.find(x=>x.code===code);
+  state.multiSegments[i][which]=a;
+  state.multiOpenField=null; render();
+}
+function multiCalendarDropdown(i,minDate){
+  const seg=state.multiSegments[i];
+  const base=new Date(seg.date+'T00:00:00'); base.setMonth(base.getMonth()+(state.calMonthOffset||0));
+  const y=base.getFullYear(), m=base.getMonth();
+  const first=new Date(y,m,1); const startDow=first.getDay();
+  const daysInMonth=new Date(y,m+1,0).getDate();
+  const today=new Date(); today.setHours(0,0,0,0);
+  const atEarliestMonth = y<today.getFullYear() || (y===today.getFullYear() && m<=today.getMonth());
+  let cells='';
+  for(let d0=0;d0<startDow;d0++) cells+=`<div></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const iso=new Date(y,m,d).toISOString().slice(0,10);
+    const disabled = iso<minDate;
+    const sel = iso===seg.date;
+    cells+=`<div class="cal-day ${disabled?'disabled':''} ${sel?'sel':''}" ${disabled?'':`onclick="selectMultiDate(${i},'${iso}')"`}>${d}</div>`;
+  }
+  const dows=['Su','Mo','Tu','We','Th','Fr','Sa'];
+  return `<div class="dropdown-panel cal-panel" onclick="event.stopPropagation()">
+    <div class="cal-header">
+      <button class="cal-nav" onclick="changeCalMonth(-1)" ${atEarliestMonth?'disabled':''}>‹</button>
+      <span>${first.toLocaleDateString('en-GB',{month:'long',year:'numeric'})}</span>
+      <button class="cal-nav" onclick="changeCalMonth(1)">›</button>
+    </div>
+    <div class="cal-grid">${dows.map(d=>`<div class="cal-dow">${d}</div>`).join('')}${cells}</div>
+    ${i>0?`<div style="font-size:11.5px;color:var(--ink-faint);margin-top:8px;text-align:center;">Must be on or after Flight ${i}'s date, per airline multi-city rules.</div>`:''}
+  </div>`;
+}
+function selectMultiDate(i,iso){
+  state.multiSegments[i].date=iso;
+  for(let j=i+1;j<state.multiSegments.length;j++){
+    if(state.multiSegments[j].date<state.multiSegments[i].date) state.multiSegments[j].date=state.multiSegments[i].date;
+  }
+  state.calMonthOffset=0;
+  state.multiOpenField=null; render();
+}
+function swapMultiSegment(e,i){
+  e.stopPropagation();
+  const btn=e.currentTarget;
+  if(btn) btn.classList.add('spin');
+  setTimeout(()=>{
+    const seg=state.multiSegments[i]; const t=seg.from; seg.from=seg.to; seg.to=t; render();
+  }, 300);
+}
+function addMultiSegment(){
+  if(state.multiSegments.length>=6) return;
+  const last=state.multiSegments[state.multiSegments.length-1];
+  const d=new Date(last.date); d.setDate(d.getDate()+3);
+  const defaultTo = AIRPORTS.find(a=>a.code!==last.to.code) || AIRPORTS[1];
+  state.multiSegments.push({from:last.to, to:defaultTo, date:d.toISOString().slice(0,10)});
+  render();
+}
+function removeMultiSegment(i){
+  if(state.multiSegments.length<=2) return;
+  state.multiSegments.splice(i,1); render();
+}
+function doMultiSearch(){
+  for(const seg of state.multiSegments){ if(seg.from.code===seg.to.code){ showToast('Each flight needs a different from and to city'); return; } }
+  state.fareSearchCount++;
+  state.multiFlights = state.multiSegments.map((seg,idx)=>({seg, flights:autoLowestFlights(genFlights(seg.from,seg.to).slice(0,4), seg.from.code+seg.to.code+seg.date+idx+'-', seg.from.code, seg.to.code)}));
+  state.multiSelected = state.multiSegments.map(()=>null);
+  state.view='multiResults'; render();
+}
+function multiResultsHTML(){
+  const legs = state.multiFlights;
+  const allSelected = state.multiSelected.every(s=>s!==null);
+  const total = state.multiSelected.reduce((sum,fl)=>sum+(fl?fl.price:0),0) * totalPax();
+  return `
+  <div class="summary-bar">
+    <div class="container summary-inner">
+      <div>
+        <div class="summary-route">Multi-city · ${legs.length} flights</div>
+        <div class="summary-meta">${legs.map(l=>l.seg.from.code+'→'+l.seg.to.code).join('  ·  ')} · ${paxLabel()} · ${state.cabin}</div>
+      </div>
+      <button class="btn btn-ghost-dark" onclick="goHome(event)">Modify search</button>
+    </div>
+  </div>
+  <div class="container" style="padding-top:24px;padding-bottom:90px;">
+    ${legs.map((leg,i)=>multiLegHTML(leg,i)).join('')}
+  </div>
+  <div class="sticky-cta" style="max-width:1180px;margin:0 auto;padding-left:24px;padding-right:24px;">
+    <div class="amt">${allSelected?fmtMoney(total):'Select a flight for every leg'}<span>${allSelected?'Total for '+totalPax()+' passenger'+(totalPax()!==1?'s':''):''}</span></div>
+    <button class="btn btn-primary" ${allSelected?'':'disabled style="opacity:.5;"'} onclick="continueMultiCity()">Continue →</button>
+  </div>`;
+}
+function multiLegHTML(leg,i){
+  const seg=leg.seg;
+  const selected = state.multiSelected[i];
+  return `<div class="card">
+    <h3>Flight ${i+1}: ${seg.from.city} (${seg.from.code}) → ${seg.to.city} (${seg.to.code})</h3>
+    <div class="card-sub">${fmtDate(seg.date)}</div>
+    ${leg.flights.map(fl=>`
+      <div class="room-option ${selected&&selected.id===fl.id&&selected._leg===i?'reco':''}" style="cursor:pointer;" onclick="selectMultiLegFlight(${i},${fl.id})">
+        <div>
+          <div class="room-name">${fl.airline} · ${airlineCode(fl.airline)}${fl.num}</div>
+          <div class="room-meta">${fl.dep} → ${fl.arr} · ${fmtDur(fl.durMin)} · ${fl.stops===0?'Direct':fl.stops+' stop via '+fl.transitCity} · ${fl.baggage} checked</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-weight:700;color:var(--navy);">${fmtMoney(fl.price)}</div>
+          <div style="font-size:11px;color:var(--ink-faint);">per passenger</div>
+          ${fl.compareRows?`<div class="lowest-badge">✓ Best price</div>`:''}
+        </div>
+      </div>`).join('')}
+  </div>`;
+}
+function selectMultiLegFlight(i,flightId){
+  const leg=state.multiFlights[i];
+  const fl=leg.flights.find(f=>f.id===flightId);
+  state.multiSelected[i]={...fl,_leg:i};
+  notifyAdmin('segment_selected', {
+    route: leg.seg.from.code+' → '+leg.seg.to.code+' (leg '+(i+1)+')',
+    flight: fl.airline+' '+airlineCode(fl.airline)+fl.num+' · '+fmtDate(leg.seg.date),
+    price: fmtMoney(fl.price),
+    agent: state.agencyUser ? state.agencyUser.agencyName : null,
+  });
+  render();
+}
+function continueMultiCity(){
+  if(!state.multiSelected.every(s=>s!==null)){ showToast('Please select a flight for every leg'); return; }
+  state.multiItinerary = state.multiSegments.map((seg,i)=>({from:seg.from,to:seg.to,date:seg.date, ...state.multiSelected[i]}));
+  const p=state.passengers;
+  const forms=[];
+  for(let i=0;i<p.adults;i++) forms.push({type:'Adult',title:'Mr',first:'',last:'',dob:'',passport:'',expiry:''});
+  for(let i=0;i<p.children;i++) forms.push({type:'Child',title:'Mstr',first:'',last:'',dob:'',passport:'',expiry:''});
+  for(let i=0;i<p.infants;i++) forms.push({type:'Infant',title:'Inf',first:'',last:'',dob:'',passport:'',expiry:''});
+  state.passengerForms=forms;
+  state.selectedFlight=null;
+  state.captcha.payment={checked:false,loading:false};
+  state.fareAdjustment=0;
+  state.view='passengers'; render();
+}
+/* Trip pricing/summary helpers shared by passengers/review/payment/confirmation */
+function perPaxTotal(){
+  const base = state.tripType==='multicity' ? state.multiItinerary.reduce((sum,leg)=>sum+leg.price,0) : state.selectedFlight.price;
+  return base + (state.fareAdjustment||0);
+}
+function logActivity(text){
+  state.activityLogs.unshift({time:new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}), text});
+}
+function tripRouteLabel(){
+  if(state.tripType==='multicity') return state.multiItinerary.map(l=>l.from.code).concat([state.multiItinerary[state.multiItinerary.length-1].to.code]).join(' → ');
+  return state.from.code+' → '+state.to.code;
+}
+function searchGridHTML(){
+  const p=state.passengers;
+  return `
+  <div class="search-grid">
+    <div class="field" onclick="openField(event,'from')">
+      <label>From</label>
+      <div class="value">${state.from.city} <span style="color:var(--ink-faint);font-weight:500;">(${state.from.code})</span></div>
+      <div class="sub">${state.from.name}</div>
+      <button class="swap-btn" onclick="swapAirports(event)" title="Swap">⇄</button>
+      ${state.openField==='from'?airportDropdown('from'):''}
+    </div>
+    <div class="field" onclick="openField(event,'to')">
+      <label>To</label>
+      <div class="value">${state.to.city} <span style="color:var(--ink-faint);font-weight:500;">(${state.to.code})</span></div>
+      <div class="sub">${state.to.name}</div>
+      ${state.openField==='to'?airportDropdown('to'):''}
+    </div>
+    <div class="field" onclick="openField(event,'depart')">
+      <label>Departure</label>
+      <div class="value">${fmtDate(state.departDate)}</div>
+      <div class="sub">${new Date(state.departDate).toLocaleDateString('en-GB',{weekday:'short'})}</div>
+      ${state.openField==='depart'?calendarDropdown('depart'):''}
+    </div>
+    <div class="field ${state.tripType==='oneway'?'return-disabled':''}" onclick="${state.tripType==='oneway'?'':"openField(event,'return')"}">
+      <label>Return</label>
+      <div class="value">${state.tripType==='oneway'?'—':fmtDate(state.returnDate)}</div>
+      <div class="sub">${state.tripType==='oneway'?'One way trip':new Date(state.returnDate).toLocaleDateString('en-GB',{weekday:'short'})}</div>
+      ${state.openField==='return'?calendarDropdown('return'):''}
+    </div>
+    <div class="field" onclick="openField(event,'pax')">
+      <label>Passengers &amp; class</label>
+      <div class="value">${totalPax()} ${totalPax()===1?'Traveller':'Travellers'}</div>
+      <div class="sub">${state.cabin}</div>
+      ${state.openField==='pax'?paxDropdown():''}
+    </div>
+  </div>
+  <div class="search-cta-row">
+    ${state.from.code===state.to.code ? `<div class="inline-warn">⚠ Origin and destination can't be the same</div>` : ''}
+    <button class="btn-search" onclick="doSearch()">🔍 Search flights</button>
+  </div>`;
+}
+function airportListHTML(field){
+  const q=state.airportQuery.toLowerCase();
+  const results = q ? AIRPORTS.filter(a=>a.city.toLowerCase().includes(q)||a.code.toLowerCase().includes(q)||a.country.toLowerCase().includes(q)||a.name.toLowerCase().includes(q)) : null;
+  const recents = recentAirportCodes();
+  return `${results ? `
+      <div class="airport-group-label">Results</div>
+      ${results.length? results.map(a=>airportRow(a,field)).join('') : '<div style="padding:10px;color:var(--ink-faint);font-size:13.5px;">No matches — try a city name or IATA code</div>'}
+    ` : `
+      ${recents.length ? `<div class="airport-group-label">🕑 Recent</div>${recents.map(a=>airportRow(a,field)).join('')}` : ''}
+      <div class="airport-group-label">Popular airports</div>
+      ${AIRPORTS.slice(0,6).map(a=>airportRow(a,field)).join('')}
+    `}`;
+}
+function airportDropdown(field){
+  return `<div class="dropdown-panel" onclick="event.stopPropagation()">
+    <input type="text" placeholder="City or airport" value="${state.airportQuery}" oninput="state.airportQuery=this.value;updateAirportList('${field}');" autofocus>
+    <div id="airportListBody">${airportListHTML(field)}</div>
+  </div>`;
+}
+function updateAirportList(field){
+  const el=document.getElementById('airportListBody');
+  if(el) el.innerHTML = airportListHTML(field);
+}
+function airportRow(a,field){
+  return `<div class="airport-row" onclick="selectAirport('${field}','${a.code}')">
+    <div class="airport-code">${a.code}</div>
+    <div><div class="airport-name">${a.city}, ${a.country}</div><div class="airport-loc">${a.name}</div></div>
+  </div>`;
+}
+function calendarDropdown(field){
+  const selDate = field==='depart'?state.departDate:state.returnDate;
+  const minDate = field==='return' ? state.departDate : todayISO(0);
+  const base = new Date(selDate+'T00:00:00');
+  base.setMonth(base.getMonth() + (state.calMonthOffset||0));
+  const y=base.getFullYear(), m=base.getMonth();
+  const first = new Date(y,m,1); const startDow=first.getDay();
+  const daysInMonth = new Date(y,m+1,0).getDate();
+  const today=new Date(); today.setHours(0,0,0,0);
+  const atEarliestMonth = y<today.getFullYear() || (y===today.getFullYear() && m<=today.getMonth());
+  let cells='';
+  for(let i=0;i<startDow;i++) cells+=`<div></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const iso = new Date(y,m,d).toISOString().slice(0,10);
+    const disabled = iso < minDate;
+    const sel = iso===selDate;
+    cells+=`<div class="cal-day ${disabled?'disabled':''} ${sel?'sel':''}" ${disabled?'':`onclick="selectDate('${field}','${iso}')"`}>${d}</div>`;
+  }
+  const dows=['Su','Mo','Tu','We','Th','Fr','Sa'];
+  return `<div class="dropdown-panel cal-panel" onclick="event.stopPropagation()">
+    ${field==='depart' ? `<div class="cal-quick">
+      <button class="cal-quick-chip" onclick="selectDate('depart','${todayISO(0)}')">Today</button>
+      <button class="cal-quick-chip" onclick="selectDate('depart','${todayISO(1)}')">Tomorrow</button>
+      <button class="cal-quick-chip" onclick="selectDate('depart','${nextWeekendISO()}')">This weekend</button>
+    </div>` : ''}
+    <div class="cal-header">
+      <button class="cal-nav" onclick="changeCalMonth(-1)" ${atEarliestMonth?'disabled':''}>‹</button>
+      <span>${first.toLocaleDateString('en-GB',{month:'long',year:'numeric'})}</span>
+      <button class="cal-nav" onclick="changeCalMonth(1)">›</button>
+    </div>
+    <div class="cal-grid">${dows.map(d=>`<div class="cal-dow">${d}</div>`).join('')}${cells}</div>
+    <div style="font-size:12px;color:var(--ink-faint);margin-top:10px;text-align:center;">Flexible dates &amp; fare comparison require a live fare-calendar feed.</div>
+  </div>`;
+}
+function changeCalMonth(delta){ state.calMonthOffset=(state.calMonthOffset||0)+delta; render(); }
+function nextWeekendISO(){
+  const d=new Date(); const day=d.getDay();
+  const addDays = day<=6 ? (6-day || 7) : 6;
+  d.setDate(d.getDate()+addDays);
+  return d.toISOString().slice(0,10);
+}
+function paxDropdown(){
+  const p=state.passengers;
+  return `<div class="dropdown-panel pax-panel" onclick="event.stopPropagation()">
+    <div class="pax-row"><div><div class="t">Adults</div><div class="s">12+ years</div></div>
+      <div class="stepper"><button onclick="changePax('adults',-1)" ${p.adults<=1?'disabled':''}>−</button><span class="n">${p.adults}</span><button onclick="changePax('adults',1)" ${p.adults>=9?'disabled':''}>+</button></div></div>
+    <div class="pax-row"><div><div class="t">Children</div><div class="s">2–11 years</div></div>
+      <div class="stepper"><button onclick="changePax('children',-1)" ${p.children<=0?'disabled':''}>−</button><span class="n">${p.children}</span><button onclick="changePax('children',1)" ${p.children>=8?'disabled':''}>+</button></div></div>
+    <div class="pax-row"><div><div class="t">Infants</div><div class="s">Under 2 years</div></div>
+      <div class="stepper"><button onclick="changePax('infants',-1)" ${p.infants<=0?'disabled':''}>−</button><span class="n">${p.infants}</span><button onclick="changePax('infants',1)" ${p.infants>=p.adults?'disabled':''}>+</button></div></div>
+    <div class="airport-group-label" style="margin-top:14px;">Cabin class</div>
+    <div class="cabin-list">
+      ${['Economy','Premium Economy','Business','First'].map(c=>`<div class="cabin-opt ${state.cabin===c?'sel':''}" onclick="setCabin('${c}')">${c}</div>`).join('')}
+    </div>
+    <button class="btn btn-primary pax-done" onclick="closeField(event)">Done</button>
+  </div>`;
+}
+function destinations(){
+  return [
+    {code:'SIN',city:'Singapore',price:45500},
+    {code:'DXB',city:'Dubai',price:52200},
+    {code:'BKK',city:'Bangkok',price:28900},
+    {code:'KUL',city:'Kuala Lumpur',price:31400},
+    {code:'JED',city:'Jeddah',price:61800},
+    {code:'DOH',city:'Doha',price:49300},
+  ];
+}
+function pickDestination(code){
+  const a = AIRPORTS.find(x=>x.code===code);
+  state.to = a; doSearch();
+}
+function recentSearchesHTML(){
+  return `<div class="recent-search-row">
+    <span class="recent-search-label">Recent searches</span>
+    ${state.recentSearches.map((r,i)=>`<button class="recent-chip" onclick="applyRecentSearch(${i})">${r.fromCode} → ${r.toCode} <span>· ${fmtDate(r.date)}</span></button>`).join('')}
+  </div>`;
+}
+
+/* -- interactions -- */
+function goHome(e){e&&e.preventDefault(); state.view='home'; state.openField=null; render(); return false;}
+function setTripType(t){state.tripType=t; render();}
+function openField(e,f){e.stopPropagation(); if(f==='from'||f==='to') state.airportQuery=''; if(f==='depart'||f==='return') state.calMonthOffset=0; state.openField = state.openField===f?null:f; render();}
+function closeField(e){e&&e.stopPropagation(); state.openField=null; render();}
+function selectAirport(field,code){
+  const a = AIRPORTS.find(x=>x.code===code);
+  if(field==='from') state.from=a; else state.to=a;
+  state.openField=null; render();
+}
+function swapAirports(e){
+  e.stopPropagation();
+  const btn=e.currentTarget;
+  if(btn) btn.classList.add('spin');
+  setTimeout(()=>{
+    const t=state.from; state.from=state.to; state.to=t;
+    render();
+  }, 300);
+}
+function selectDate(field,iso){
+  if(field==='depart'){ state.departDate=iso; if(state.returnDate<iso){ const d=new Date(iso); d.setDate(d.getDate()+5); state.returnDate=d.toISOString().slice(0,10);} }
+  else { state.returnDate=iso; }
+  state.calMonthOffset=0;
+  state.openField=null; render();
+}
+function changePax(type,delta){
+  const p=state.passengers; p[type]=Math.max(0,p[type]+delta);
+  if(type==='adults') p.adults=Math.max(1,p.adults);
+  if(p.infants>p.adults) p.infants=p.adults;
+  render();
+}
+function setCabin(c){state.cabin=c; render();}
+/* ---------------- RECENT SEARCHES ---------------- */
+function saveRecentSearch(){
+  const entry = {fromCode:state.from.code, fromCity:state.from.city, toCode:state.to.code, toCity:state.to.city, date:state.departDate, tripType:state.tripType, cabin:state.cabin};
+  state.recentSearches = state.recentSearches.filter(r=> !(r.fromCode===entry.fromCode && r.toCode===entry.toCode));
+  state.recentSearches.unshift(entry);
+  if(state.recentSearches.length>5) state.recentSearches.length=5;
+}
+function recentAirportCodes(){
+  const codes=[];
+  state.recentSearches.forEach(r=>{ if(!codes.includes(r.fromCode)) codes.push(r.fromCode); if(!codes.includes(r.toCode)) codes.push(r.toCode); });
+  return codes.slice(0,4).map(c=>AIRPORTS.find(a=>a.code===c)).filter(Boolean);
+}
+function applyRecentSearch(idx){
+  const r=state.recentSearches[idx];
+  if(!r) return;
+  state.from=AIRPORTS.find(a=>a.code===r.fromCode);
+  state.to=AIRPORTS.find(a=>a.code===r.toCode);
+  state.departDate = r.date < todayISO(0) ? todayISO(7) : r.date;
+  state.tripType = r.tripType==='multicity' ? 'roundtrip' : r.tripType;
+  state.cabin = r.cabin;
+  doSearch();
+}
+function attachOutsideClick(){
+  document.body.onclick = ()=>{ if(state.openField || state.acctMenuOpen || state.multiOpenField){ state.openField=null; state.acctMenuOpen=false; state.multiOpenField=null; render(); } };
+}
+function doSearch(){
+  if(state.from.code===state.to.code){ showToast('Origin and destination cannot be the same'); return; }
+  if(state.tripType==='multicity') state.tripType='roundtrip';
+  state.fareSearchCount++;
+  saveRecentSearch();
+  state.flights = autoLowestFlights(genFlights(state.from,state.to), state.from.code+state.to.code+state.departDate+'-');
+  state.filters={stops:new Set(),airlines:new Set(),depTime:new Set(),priceMax:60000};
+  state.sortBy='recommended';
+  state.expandedFlight=null;
+  const cheapestOwn = [...state.flights].sort((a,b)=>a.price-b.price)[0];
+  state.networkCompare = cheapestOwn.compareRows;
+  state.networkCompareOpen=false;
+  state.view='results';
+  render();
+}
+
+/* ---------------- RESULTS PAGE ---------------- */
+function filteredFlights(){
+  let list = [...state.flights];
+  const f=state.filters;
+  if(f.stops.size) list = list.filter(fl=> f.stops.has(fl.stops===0?'direct':fl.stops===1?'1stop':'2plus'));
+  if(f.airlines.size) list = list.filter(fl=>f.airlines.has(fl.airline));
+  if(f.depTime.size) list = list.filter(fl=>f.depTime.has(depBucket(fl.dep)));
+  list = list.filter(fl=>fl.price<=f.priceMax);
+  if(state.sortBy==='cheapest') list.sort((a,b)=>a.price-b.price);
+  else if(state.sortBy==='fastest') list.sort((a,b)=>a.durMin-b.durMin);
+  else if(state.sortBy==='earliest') list.sort((a,b)=>a.dep.localeCompare(b.dep));
+  else list.sort((a,b)=> (a.price + a.durMin*20) - (b.price + b.durMin*20));
+  return list;
+}
+function depBucket(t){const h=parseInt(t.split(':')[0]); if(h<6) return 'night'; if(h<12) return 'morning'; if(h<18) return 'afternoon'; return 'evening';}
+
+function resultsHTML(){
+  const all = state.flights;
+  const list = filteredFlights();
+  const cheapest = [...all].sort((a,b)=>a.price-b.price)[0];
+  const fastest = [...all].sort((a,b)=>a.durMin-b.durMin)[0];
+  const direct = all.find(f=>f.stops===0);
+  const best = [...all].sort((a,b)=>(a.price+a.durMin*20)-(b.price+b.durMin*20))[0];
+  const airlineOptions = [...new Set(all.map(f=>f.airline))];
+
+  return `
+  <div class="summary-bar">
+    <div class="container summary-inner">
+      <div>
+        <div class="summary-route">${state.from.code} → ${state.to.code} <span style="font-weight:400;color:rgba(255,255,255,0.5);">|</span> ${state.from.city} to ${state.to.city}</div>
+        <div class="summary-meta">${fmtDate(state.departDate)}${state.tripType==='roundtrip'?' – '+fmtDate(state.returnDate):''} · ${paxLabel()} · ${state.cabin}</div>
+      </div>
+      <button class="btn btn-ghost-dark" onclick="goHome(event)">Modify search</button>
+    </div>
+  </div>
+  <div class="container results-page">
+    <div class="card" style="margin-top:20px;display:flex;align-items:center;gap:12px;">
+      <div style="width:38px;height:38px;border-radius:50%;background:var(--success-bg);color:var(--success);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✓</div>
+      <div><h3 style="margin:0;font-size:15px;">Best available fares</h3><div class="card-sub" style="margin:2px 0 0;">Every price below is already our lowest verified fare for this route.</div></div>
+    </div>
+    <div class="results-body">
+      <aside class="filter-panel" id="filterPanel">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <strong style="font-size:15px;">Filters</strong>
+          <button class="btn btn-text" onclick="clearFilters()" style="padding:0;">Clear all</button>
+          <button class="burger" style="display:none;color:var(--ink);" onclick="toggleFilterSheet()">✕</button>
+        </div>
+        <h4>Stops</h4>
+        <label class="chk-row"><input type="checkbox" ${state.filters.stops.has('direct')?'checked':''} onchange="toggleFilter('stops','direct')"> Direct</label>
+        <label class="chk-row"><input type="checkbox" ${state.filters.stops.has('1stop')?'checked':''} onchange="toggleFilter('stops','1stop')"> 1 stop</label>
+        <label class="chk-row"><input type="checkbox" ${state.filters.stops.has('2plus')?'checked':''} onchange="toggleFilter('stops','2plus')"> 2+ stops</label>
+        <h4>Price (max)</h4>
+        <div class="range-row"><span>BDT 0</span><span>${fmtMoney(state.filters.priceMax)}</span></div>
+        <input type="range" min="30000" max="60000" step="500" value="${state.filters.priceMax}" oninput="setPriceMax(this.value)">
+        <h4>Departure time</h4>
+        <div class="timepill-row">
+          ${['morning','afternoon','evening','night'].map(t=>`<button class="timepill ${state.filters.depTime.has(t)?'active':''}" onclick="toggleFilter('depTime','${t}')">${t[0].toUpperCase()+t.slice(1)}</button>`).join('')}
+        </div>
+        <h4>Airlines</h4>
+        ${airlineOptions.map(a=>`<label class="chk-row"><input type="checkbox" ${state.filters.airlines.has(a)?'checked':''} onchange="toggleFilter('airlines','${a}')"> ${a}</label>`).join('')}
+      </aside>
+
+      <div>
+        <div class="badge-strip">
+          ${badgeCard('Best value',best,'tag-best')}
+          ${badgeCard('Cheapest',cheapest,'tag-cheap')}
+          ${badgeCard('Fastest',fastest,'tag-fast')}
+        </div>
+        <div class="sort-row">
+          <div class="found-count">${list.length} flight${list.length!==1?'s':''} found</div>
+          <div class="sort-tabs">
+            ${[['recommended','Recommended'],['cheapest','Cheapest'],['fastest','Fastest'],['earliest','Earliest']].map(([k,l])=>`<button class="sort-tab ${state.sortBy===k?'active':''}" onclick="setSort('${k}')">${l}</button>`).join('')}
+          </div>
+        </div>
+        ${list.length ? list.map(fl=>flightCard(fl)).join('') : `<div class="card" style="text-align:center;color:var(--ink-faint);">No flights match your filters. <button class="btn-text" onclick="clearFilters()">Clear filters</button></div>`}
+      </div>
+    </div>
+    <button class="filter-toggle-mobile" onclick="toggleFilterSheet()">Filter &amp; sort</button>
+  </div>`;
+}
+function badgeCard(label,fl,cls){
+  if(!fl) return '';
+  return `<div class="badge-card" onclick="scrollToFlight(${fl.id})">
+    <span class="tag ${cls}">${label}</span>
+    <div class="al">${fl.airline}</div>
+    <div class="pr">${fmtMoney(fl.price)}</div>
+    <div class="meta">${fmtDur(fl.durMin)} · ${fl.stops===0?'Direct':fl.stops+' stop'}</div>
+  </div>`;
+}
+function scrollToFlight(id){
+  state.expandedFlight=null;
+  render();
+  setTimeout(()=>{ const el=document.getElementById('flight-'+id); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); },30);
+}
+function flightCard(fl){
+  const open = state.expandedFlight===fl.id;
+  return `<div class="flight-card" id="flight-${fl.id}">
+    <div class="flight-top">
+      <div class="airline-block">
+        <div class="airline-logo">${airlineCode(fl.airline)}</div>
+        <div><div class="airline-name">${fl.airline}</div><div class="flight-no">${airlineCode(fl.airline)} ${fl.num}</div></div>
+      </div>
+      <div class="route-block">
+        <div class="rb-time"><div class="t">${fl.dep}</div><div class="c">${state.from.code}</div></div>
+        <div class="rb-mid">
+          <div class="dur">${fmtDur(fl.durMin)}</div>
+          <div class="rb-line"><span class="dot" style="left:0;"></span><span class="dot" style="right:0;"></span></div>
+          <div class="rb-stops ${fl.stops===0?'direct':'stop'}">${fl.stops===0?'Direct':fl.stops+' stop · '+fl.transitCity}</div>
+        </div>
+        <div class="rb-time"><div class="t">${fl.arr}</div><div class="c">${state.to.code}</div></div>
+      </div>
+      <div class="price-block">
+        <div class="p">${fmtMoney(fl.price)}</div>
+        <div class="pp">per passenger</div>
+        ${fl.compareRows ? `<div class="lowest-badge">✓ Best price</div>` : ''}
+      </div>
+    </div>
+    <div class="baggage-row">
+      <span>🧳 Cabin ${fl.cabinBag}</span><span>🎒 Checked ${fl.baggage}</span><span>Fare: ${fl.fare}</span>
+    </div>
+    <div class="flight-actions">
+      <button class="btn btn-outline" onclick="toggleDetails(${fl.id})">${open?'Hide details':'View details'}</button>
+      <button class="btn btn-primary" onclick="selectFlight(${fl.id})">Select</button>
+    </div>
+    <div class="flight-details ${open?'open':''}">
+      ${fl.stops===0 ? `
+        <div class="segment"><div class="seg-time">${fl.dep}</div><div class="seg-body"><div class="seg-city">${state.from.city} (${state.from.code})</div><div class="seg-sub">Terminal 2 · ${fl.aircraft}</div></div></div>
+        <div class="segment"><div class="seg-time">${fl.arr}</div><div class="seg-body" style="border-left:none;"><div class="seg-city">${state.to.city} (${state.to.code})</div><div class="seg-sub">Terminal 1</div></div></div>
+      ` : `
+        <div class="segment"><div class="seg-time">${fl.dep}</div><div class="seg-body"><div class="seg-city">${state.from.city} (${state.from.code})</div><div class="seg-sub">Terminal 2 · ${fl.aircraft}</div></div></div>
+        <div class="transit-note">⏱ Transit in ${fl.transitCity} · ${fl.transitDur}</div>
+        <div class="segment"><div class="seg-time">${fl.arr}</div><div class="seg-body" style="border-left:none;"><div class="seg-city">${state.to.city} (${state.to.code})</div><div class="seg-sub">Terminal 1</div></div></div>
+      `}
+      <div class="detail-grid">
+        <div class="detail-mini"><h5>Flight duration</h5><p>${fmtDur(fl.durMin)}</p></div>
+        <div class="detail-mini"><h5>Fare type</h5><p>${fl.fare}</p></div>
+        <div class="detail-mini"><h5>Change / refund</h5><p>${fl.fare==='Basic'?'Non-refundable':fl.fare==='Flex'?'Free date change':'Fee applies'}</p></div>
+      </div>
+      <div class="fare-breakdown">
+        <div class="fb-row"><span>Flight fare</span><span>${fmtMoney(Math.round(fl.price*0.87))}</span></div>
+        <div class="fb-row"><span>Taxes &amp; fees</span><span>${fmtMoney(Math.round(fl.price*0.10))}</span></div>
+        <div class="fb-row"><span>Service fee</span><span>${fmtMoney(fl.price-Math.round(fl.price*0.87)-Math.round(fl.price*0.10))}</span></div>
+        <div class="fb-row total"><span>Total (per passenger)</span><span>${fmtMoney(fl.price)}</span></div>
+      </div>
+    </div>
+  </div>`;
+}
+function toggleDetails(id){ state.expandedFlight = state.expandedFlight===id?null:id; render(); setTimeout(()=>{const el=document.getElementById('flight-'+id); if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'});},20); }
+function toggleFilter(cat,val){ const s=state.filters[cat]; s.has(val)?s.delete(val):s.add(val); render(); }
+function setPriceMax(v){ state.filters.priceMax=parseInt(v); render(); }
+function clearFilters(){ state.filters={stops:new Set(),airlines:new Set(),depTime:new Set(),priceMax:60000}; render(); }
+function setSort(s){ state.sortBy=s; render(); }
+function toggleFilterSheet(){ document.getElementById('filterPanel').classList.toggle('open'); }
+function selectFlight(id){
+  state.selectedFlight = state.flights.find(f=>f.id===id);
+  const fl=state.selectedFlight;
+  notifyAdmin('segment_selected', {
+    route: state.from.code+' → '+state.to.code,
+    flight: fl.airline+' '+airlineCode(fl.airline)+fl.num+' · '+fmtDate(state.departDate),
+    price: fmtMoney(fl.price),
+    agent: state.agencyUser ? state.agencyUser.agencyName : null,
+  });
+  showToast('Mohammad Travels has been notified of this flight selection');
+  const p=state.passengers;
+  const forms=[];
+  for(let i=0;i<p.adults;i++) forms.push({type:'Adult',title:'Mr',first:'',last:'',dob:'',passport:'',expiry:''});
+  for(let i=0;i<p.children;i++) forms.push({type:'Child',title:'Mstr',first:'',last:'',dob:'',passport:'',expiry:''});
+  for(let i=0;i<p.infants;i++) forms.push({type:'Infant',title:'Inf',first:'',last:'',dob:'',passport:'',expiry:''});
+  state.passengerForms = forms;
+  state.captcha.payment={checked:false,loading:false};
+  state.fareAdjustment=0;
+  state.view='passengers';
+  render();
+}
+
+/* ---------------- BOOKING FLOW WRAPPER ---------------- */
+function flowWrap(step,inner){
+  const steps=[['results','Flight'],['passengers','Passenger'],['review','Review'],['payment','Payment'],['confirmation','Done']];
+  const order=['results','passengers','review','payment','confirmation'];
+  const idx = order.indexOf(step);
+  return `<div class="flow-page">
+    <div class="progress">
+      ${['Search','Flight','Passenger','Review','Payment','Confirmation'].map((label,i)=>{
+        const stepMap=['results','results','passengers','review','payment','confirmation'];
+        const thisIdx = i<=1? (i===0?-1:0) : i-1; // rough map: Search(done),Flight(done),Passenger,Review,Payment,Confirmation
+        let cls='';
+        const stateOrder=['results','passengers','review','payment','confirmation'];
+        const curr = stateOrder.indexOf(step);
+        const thisStepIdx = i===0? -1 : stateOrder.indexOf(stepMap[i]);
+        if(i===0 || i===1){ cls='done'; }
+        else if(stepMap[i]===step) cls='active';
+        else if(stateOrder.indexOf(stepMap[i]) < curr) cls='done';
+        return `<div class="p-step ${cls}"><div class="p-dot">${cls==='done'?'✓':i+1}</div><div class="p-label">${label}</div></div>`;
+      }).join('')}
+    </div>
+    ${inner}
+  </div>`;
+}
+
+/* ---------------- PASSENGERS ---------------- */
+function passengersHTML(){
+  const isMulti = state.tripType==='multicity';
+  return `
+  <div class="card" style="background:var(--navy);color:#fff;">
+    ${isMulti ? `
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <strong>${tripRouteLabel()}</strong>
+        <span style="font-weight:700;">${fmtMoney(perPaxTotal())} <span style="font-weight:400;font-size:12px;opacity:.7;">/ passenger</span></span>
+      </div>
+      <div style="font-size:12.5px;opacity:.75;margin-top:6px;">${state.multiItinerary.map(l=>l.airline+' '+airlineCode(l.airline)+l.num+' · '+fmtDate(l.date)).join(' &nbsp;|&nbsp; ')}</div>
+    ` : `
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div><strong>${state.from.code} → ${state.to.code}</strong> · ${fmtDate(state.departDate)} · ${state.selectedFlight.airline} ${state.selectedFlight.num}</div>
+        <div style="font-weight:700;">${fmtMoney(state.selectedFlight.price)} <span style="font-weight:400;font-size:12px;opacity:.7;">/ passenger</span></div>
+      </div>
+    `}
+  </div>
+  ${state.passengerForms.map((pf,i)=>passengerCard(pf,i)).join('')}
+  <div class="card">
+    <h3>Contact information</h3>
+    <div class="card-sub">Your ticket and booking confirmation will be sent to this email.</div>
+    <div class="form-grid">
+      <div class="fg ${state.errors.email?'invalid':''}"><label>Email address</label><input type="email" value="${state.contact.email}" oninput="state.contact.email=this.value" placeholder="you@example.com"><span class="err">Please enter a valid email.</span></div>
+      <div class="fg ${state.errors.phone?'invalid':''}">
+        <label>Mobile number</label>
+        <div style="display:flex;gap:8px;">
+          <select style="width:90px;padding:11px 8px;border-radius:9px;border:1.5px solid var(--border);" onchange="state.contact.code=this.value">
+            ${['+880','+65','+971','+66','+60','+966'].map(c=>`<option ${state.contact.code===c?'selected':''}>${c}</option>`).join('')}
+          </select>
+          <input type="tel" value="${state.contact.phone}" oninput="state.contact.phone=this.value" placeholder="1XXXXXXXXX" style="flex:1;">
+        </div>
+        <span class="err">Please enter a mobile number.</span>
+      </div>
+    </div>
+  </div>
+  <div class="sticky-cta">
+    <button class="btn btn-outline" onclick="goToResults()">← Back to flights</button>
+    <button class="btn btn-primary" onclick="submitPassengers()">Continue to review →</button>
+  </div>`;
+}
+function passengerCard(pf,i){
+  const errKey='pf'+i;
+  return `<div class="card">
+    <h3>Passenger ${i+1} <span class="pax-badge">${pf.type}</span></h3>
+    <div class="form-grid g3">
+      <div class="fg"><label>Title</label>
+        <select onchange="state.passengerForms[${i}].title=this.value">
+          ${(pf.type==='Adult'?['Mr','Mrs','Ms']:pf.type==='Child'?['Mstr','Miss']:['Inf']).map(t=>`<option ${pf.title===t?'selected':''}>${t}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fg ${state.errors[errKey+'first']?'invalid':''}"><label>First name</label><input type="text" value="${pf.first}" oninput="state.passengerForms[${i}].first=this.value"><span class="err">Please enter the passenger's first name.</span></div>
+      <div class="fg ${state.errors[errKey+'last']?'invalid':''}"><label>Surname</label><input type="text" value="${pf.last}" oninput="state.passengerForms[${i}].last=this.value"><span class="err">Please enter the passenger's surname.</span></div>
+    </div>
+    <div class="form-grid g3" style="margin-top:14px;">
+      <div class="fg ${state.errors[errKey+'dob']?'invalid':''}"><label>Date of birth</label><input type="date" value="${pf.dob}" oninput="state.passengerForms[${i}].dob=this.value"><span class="err">Please enter date of birth.</span></div>
+      <div class="fg"><label>Passport number</label><input type="text" value="${pf.passport}" oninput="state.passengerForms[${i}].passport=this.value" placeholder="Required for international travel"></div>
+      <div class="fg"><label>Passport expiry</label><input type="date" value="${pf.expiry}" oninput="state.passengerForms[${i}].expiry=this.value"></div>
+    </div>
+  </div>`;
+}
+function goToResults(){ state.view = state.tripType==='multicity' ? 'multiResults' : 'results'; render(); }
+function submitPassengers(){
+  const errors={};
+  state.passengerForms.forEach((pf,i)=>{
+    if(!pf.first.trim()) errors['pf'+i+'first']=true;
+    if(!pf.last.trim()) errors['pf'+i+'last']=true;
+    if(!pf.dob) errors['pf'+i+'dob']=true;
+  });
+  if(!state.contact.email.includes('@')) errors.email=true;
+  if(!state.contact.phone.trim()) errors.phone=true;
+  state.errors=errors;
+  if(Object.keys(errors).length){ render(); showToast('Please complete the highlighted fields'); return; }
+  state.view='review'; render();
+}
+
+/* ---------------- REVIEW ---------------- */
+function reviewHTML(){
+  const isMulti = state.tripType==='multicity';
+  const n=totalPax();
+  const perPax = perPaxTotal();
+  const fare=Math.round(perPax*0.87), tax=Math.round(perPax*0.10), svc=perPax-fare-tax;
+  const total = perPax*n;
+  return `
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;"><h3>Trip</h3><a class="edit-link" href="#" onclick="return editStep(event,'${isMulti?'multiResults':'results'}')">Edit</a></div>
+    ${isMulti ? state.multiItinerary.map(l=>`<div class="review-row"><span>${l.from.city} → ${l.to.city}</span><span>${fmtDate(l.date)}</span></div>`).join('') : `
+    <div class="review-row"><span>${state.from.city} → ${state.to.city}</span><span>${fmtDate(state.departDate)}</span></div>
+    ${state.tripType==='roundtrip'?`<div class="review-row"><span>${state.to.city} → ${state.from.city}</span><span>${fmtDate(state.returnDate)}</span></div>`:''}
+    `}
+  </div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;"><h3>Passengers</h3><a class="edit-link" href="#" onclick="return editStep(event,'passengers')">Edit</a></div>
+    ${state.passengerForms.map(pf=>`<div class="review-row"><span>${pf.title} ${pf.first} ${pf.last}</span><span class="k">${pf.type}</span></div>`).join('')}
+  </div>
+  <div class="card">
+    <h3>Flight${isMulti?'s':''}</h3>
+    ${isMulti ? state.multiItinerary.map((l,i)=>`
+      <div class="review-row"><span>Flight ${i+1}: ${l.airline} ${airlineCode(l.airline)}${l.num}</span><span>${l.dep} → ${l.arr}</span></div>
+      <div class="review-row"><span>Baggage</span><span>${l.baggage} checked, ${l.cabinBag} cabin</span></div>
+    `).join('') : `
+    <div class="review-row"><span>${state.selectedFlight.airline} ${airlineCode(state.selectedFlight.airline)}${state.selectedFlight.num}</span><span>${state.selectedFlight.dep} → ${state.selectedFlight.arr}</span></div>
+    <div class="review-row"><span>Baggage</span><span>${state.selectedFlight.baggage} checked, ${state.selectedFlight.cabinBag} cabin</span></div>
+    <div class="review-row"><span>Stops</span><span>${state.selectedFlight.stops===0?'Direct':state.selectedFlight.stops+' stop via '+state.selectedFlight.transitCity}</span></div>
+    `}
+  </div>
+  <div class="card">
+    <h3>Price</h3>
+    <div class="fare-breakdown" style="background:none;padding:0;">
+      <div class="fb-row"><span>Fare (${n} × ${fmtMoney(fare)})</span><span>${fmtMoney(fare*n)}</span></div>
+      <div class="fb-row"><span>Taxes &amp; fees (${n} ×)</span><span>${fmtMoney(tax*n)}</span></div>
+      <div class="fb-row"><span>Service fee (${n} ×)</span><span>${fmtMoney(svc*n)}</span></div>
+      <div class="fb-row total"><span>Total</span><span>${fmtMoney(total)}</span></div>
+    </div>
+  </div>
+  <div class="sticky-cta">
+    <button class="btn btn-outline" onclick="editStep(event,'passengers')">← Back</button>
+    <button class="btn btn-primary" onclick="startFareRevalidation()">Continue to payment →</button>
+  </div>`;
+}
+function editStep(e,step){ e&&e.preventDefault(); state.view=step; render(); return false; }
+
+/* ---------------- PRICE REVALIDATION ----------------
+   Re-checks the fare against the (simulated) source before allowing
+   payment, per the "never silently charge a different price" rule. The
+   outcome is deterministic per booking (seeded from the route/date) rather
+   than truly random, so it's reproducible for demo purposes — a real
+   system would re-query the actual partner/GDS here. */
+function startFareRevalidation(){
+  showToast('Verifying current fare with our network…');
+  setTimeout(()=>{
+    const seed = tripRouteLabel() + (state.tripType==='multicity' ? state.multiItinerary.map(l=>l.date).join('') : state.departDate) + (state.bookingRef||'seed');
+    let h=0; for(let i=0;i<seed.length;i++) h=(h*31+seed.charCodeAt(i))>>>0;
+    const changed = (h%5===0); // ~20% of the time, for demo variety
+    if(changed){
+      const bumpPct = 0.03 + (h%3)*0.01;
+      const oldPerPax = perPaxTotal();
+      const newPerPax = Math.round(oldPerPax*(1+bumpPct)/50)*50;
+      state.fareRevalidation = {oldPerPax, newPerPax, oldTotal: oldPerPax*totalPax(), newTotal: newPerPax*totalPax()};
+      state.view='fareChanged'; render();
+    } else {
+      showToast('Fare verified — no change.');
+      state.view='payment'; render();
+    }
+  }, 900);
+}
+function fareChangedHTML(){
+  const r=state.fareRevalidation;
+  return `<div class="card">
+    <div style="text-align:center;">
+      <div style="font-size:32px;">⚠️</div>
+      <h2 style="margin:8px 0 4px;">Fare updated</h2>
+      <p style="color:var(--ink-soft);">The price changed slightly since you started. This can happen if fares move between search and checkout — we never charge a different price without asking first.</p>
+    </div>
+    <div class="ref-grid">
+      <div class="ref-box"><div class="l">Old total</div><div class="v" style="text-decoration:line-through;color:var(--ink-faint);">${fmtMoney(r.oldTotal)}</div></div>
+      <div class="ref-box"><div class="l">New total</div><div class="v" style="color:var(--coral);">${fmtMoney(r.newTotal)}</div></div>
+    </div>
+    <div style="text-align:center;font-size:13px;color:var(--ink-faint);">Difference: +${fmtMoney(r.newTotal-r.oldTotal)}</div>
+    <div class="confirm-actions">
+      <button class="btn btn-outline" onclick="declineFareChange()">Search again</button>
+      <button class="btn btn-primary" onclick="acceptFareChange()">Accept new price</button>
+    </div>
+  </div>`;
+}
+function acceptFareChange(){
+  state.fareAdjustment = state.fareRevalidation.newPerPax - state.fareRevalidation.oldPerPax;
+  logActivity('Customer accepted fare change: +'+fmtMoney(state.fareRevalidation.newTotal-state.fareRevalidation.oldTotal));
+  state.fareRevalidation=null;
+  state.view='payment'; render();
+}
+function declineFareChange(){
+  state.fareRevalidation=null; state.fareAdjustment=0;
+  state.view = state.tripType==='multicity' ? 'multiResults' : 'results';
+  render();
+}
+
+/* ---------------- PAYMENT ---------------- */
+function paymentHTML(){
+  const total=perPaxTotal()*totalPax();
+  return `
+  <div class="card">
+    <h3>Total amount</h3>
+    <div style="font-size:26px;font-weight:700;color:var(--navy);">${fmtMoney(total)}</div>
+    <div class="card-sub">for ${totalPax()} passenger${totalPax()!==1?'s':''} · ${tripRouteLabel()}</div>
+  </div>
+  <div class="card">
+    <h3>Payment method</h3>
+    <div class="pay-methods">
+      ${[['card','💳 Card'],['mobile','📱 Mobile payment'],['bank','🏦 Bank transfer']].map(([k,l])=>`<div class="pay-method ${state.paymentMethod===k?'sel':''}" onclick="setPayMethod('${k}')">${l}</div>`).join('')}
+    </div>
+    ${state.paymentMethod==='card' ? `
+      <div class="form-grid">
+        <div class="fg" style="grid-column:1/-1;"><label>Card number</label><input type="text" placeholder="4242 4242 4242 4242" id="cardNum"></div>
+        <div class="fg"><label>Name on card</label><input type="text" placeholder="As shown on card"></div>
+        <div class="fg"><label>Expiry</label><input type="text" placeholder="MM/YY"></div>
+      </div>` : state.paymentMethod==='mobile' ? `
+      <div class="fg"><label>Mobile wallet number</label><input type="tel" placeholder="01XXXXXXXXX"></div>
+      <div class="card-sub" style="margin-top:8px;">You'll be redirected to your wallet app to confirm payment.</div>` : `
+      <div class="card-sub">Bank transfer instructions and a reference number will be shown on the next step.</div>`}
+    <div style="font-size:12px;color:var(--ink-faint);margin-top:14px;">🔒 Demo only — no real payment is processed and no card details are stored.</div>
+  </div>
+  <div class="card">
+    <h3>Security check</h3>
+    <div class="card-sub">One quick check before we process your payment.</div>
+    ${captchaWidget('payment')}
+  </div>
+  <div class="sticky-cta">
+    <button class="btn btn-outline" onclick="state.view='review';render();">← Back</button>
+    <button class="btn btn-primary" onclick="submitPayment()">Pay ${fmtMoney(total)} →</button>
+  </div>`;
+}
+function setPayMethod(m){ state.paymentMethod=m; render(); }
+function submitPayment(){
+  if(!state.captcha.payment.checked){ showToast("Please confirm you're not a robot before paying"); return; }
+  state.bookingRef = 'MT' + Math.random().toString(36).slice(2,8).toUpperCase();
+  state.pnr = Math.random().toString(36).slice(2,7).toUpperCase();
+  state.captcha.payment={checked:false,loading:false};
+  const lead=state.passengerForms[0];
+  const n=totalPax();
+  const netFareTotal = state.tripType==='multicity' ? state.multiItinerary.reduce((s,l)=>s+(l.netFare||0),0) : (state.selectedFlight.netFare||0);
+  const markupTotal = state.tripType==='multicity' ? state.multiItinerary.reduce((s,l)=>s+(l.markup||0),0) : (state.selectedFlight.markup||0);
+  const supplierName = state.tripType==='multicity' ? state.multiItinerary.map(l=>l.supplierName).filter((v,i,a)=>a.indexOf(v)===i).join(', ') : state.selectedFlight.supplierName;
+  notifyAdmin('flight', {
+    bookingRef: state.bookingRef, pnr: state.pnr,
+    route: tripRouteLabel(),
+    passenger: lead ? `${lead.title} ${lead.first} ${lead.last}` : '—',
+    paxCount: n,
+    contactEmail: state.contact.email, contactPhone: (state.contact.code||'')+' '+state.contact.phone,
+    total: fmtMoney(perPaxTotal()*n), totalAmount: perPaxTotal()*n,
+    netFare: netFareTotal*n, markup: markupTotal*n, supplierName,
+    ticketIssued:false,
+    agent: state.agencyUser ? state.agencyUser.agencyName : null,
+  });
+  logActivity('New flight booking: '+state.bookingRef+' ('+tripRouteLabel()+')');
+  state.fareAdjustment=0;
+  state.view='confirmation'; render();
+}
+
+/* ---------------- CONFIRMATION ---------------- */
+function confirmationHTML(){
+  const isMulti = state.tripType==='multicity';
+  return `
+  <div class="card">
+    <div class="confirm-hero">
+      <div class="confirm-check">✓</div>
+      <h2 style="margin:0;">Booking confirmed</h2>
+      <p style="color:var(--ink-soft);margin:6px 0 0;">A confirmation has been sent to ${state.contact.email||'your email'}.</p>
+    </div>
+    <div class="ref-grid">
+      <div class="ref-box"><div class="l">Booking reference</div><div class="v">${state.bookingRef}</div></div>
+      <div class="ref-box"><div class="l">PNR</div><div class="v">${state.pnr}</div></div>
+    </div>
+    <div class="review-row"><span>${state.passengerForms[0].title} ${state.passengerForms[0].first} ${state.passengerForms[0].last}${state.passengerForms.length>1?' + '+(state.passengerForms.length-1)+' more':''}</span><span class="k">Lead passenger</span></div>
+    ${isMulti ? state.multiItinerary.map((l,i)=>`
+      <div class="review-row"><span>${l.from.city} (${l.from.code}) → ${l.to.city} (${l.to.code})</span><span>${fmtDate(l.date)}</span></div>
+      <div class="review-row"><span>${l.airline} ${airlineCode(l.airline)}${l.num}</span><span>${l.dep} → ${l.arr}</span></div>
+    `).join('') : `
+    <div class="review-row"><span>${state.from.city} (${state.from.code}) → ${state.to.city} (${state.to.code})</span><span>${fmtDate(state.departDate)}</span></div>
+    <div class="review-row"><span>${state.selectedFlight.airline} ${airlineCode(state.selectedFlight.airline)}${state.selectedFlight.num}</span><span>${state.selectedFlight.dep} → ${state.selectedFlight.arr}</span></div>
+    `}
+    <div class="review-row"><span>Payment status</span><span style="color:var(--success);font-weight:700;">Paid</span></div>
+    <div class="security-note" style="margin-top:14px;">📋 <span>Our ticketing team has been notified with your flight and contact details to issue your ticket. (Demo only: this writes to an in-app admin console, not a real email/SMS/webhook.)</span></div>
+    <div class="confirm-actions">
+      <button class="btn btn-outline" onclick="showToast('E-ticket delivery connects to a real ticketing/PNR system in production')">Download e-ticket</button>
+      <button class="btn btn-outline" onclick="showToast('Invoice generation connects to billing in production')">Download invoice</button>
+      <button class="btn btn-outline" onclick="return navigate('myBooking')">View booking</button>
+      <button class="btn btn-outline" onclick="shareItinerary()">Share itinerary</button>
+    </div>
+  </div>
+  <div style="text-align:center;">
+    <button class="btn btn-primary" onclick="resetToHome()">Book another flight</button>
+  </div>`;
+}
+function shareItinerary(){
+  let text;
+  if(state.tripType==='multicity'){
+    text = `Mohammad Travels booking ${state.bookingRef}: ${tripRouteLabel()} — ${state.multiItinerary.map(l=>l.airline+' '+airlineCode(l.airline)+l.num+' on '+fmtDate(l.date)).join(', ')}.`;
+  } else {
+    const fl=state.selectedFlight;
+    text = `Mohammad Travels booking ${state.bookingRef}: ${state.from.code} to ${state.to.code} on ${fmtDate(state.departDate)}, ${fl.airline} ${fl.num}.`;
+  }
+  if(navigator.clipboard){ navigator.clipboard.writeText(text).then(()=>showToast('Itinerary copied to clipboard')).catch(()=>showToast(text)); }
+  else showToast(text);
+}
+function resetToHome(){
+  state.view='home'; state.selectedFlight=null; state.passengerForms=[]; state.errors={};
+  state.multiItinerary=null; state.multiFlights=null; state.multiSelected=[];
+  state.fareAdjustment=0; state.fareRevalidation=null;
+  render();
+}
+
+/* ---------------- AUTH (mock) ---------------- */
+function authHTML(mode){
+  const f=state.authForm; const e=state.errors;
+  return `<div class="page-body">
+    <div class="auth-wrap">
+      <div class="auth-tabs">
+        <button class="trip-tab ${mode==='login'?'active':''}" onclick="switchAuthMode('login')">Log in</button>
+        <button class="trip-tab ${mode==='register'?'active':''}" onclick="switchAuthMode('register')">Register</button>
+      </div>
+      <div class="card">
+        <h3>${mode==='login'?'Welcome back':'Create your account'}</h3>
+        <div class="card-sub">${mode==='login'?'Log in to see your bookings and saved details.':'Fields marked with an asterisk are required to book.'}</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          ${mode==='register'?`
+          <div class="fg ${e.auth_name?'invalid':''}"><label>Full name <span class="req-star">*</span></label><input type="text" value="${f.name}" oninput="state.authForm.name=this.value" placeholder="As it appears on your passport" required><span class="err">Please enter your full name.</span></div>
+          `:''}
+          <div class="fg ${e.auth_email?'invalid':''}"><label>Email <span class="req-star">*</span></label><input type="email" value="${f.email}" oninput="state.authForm.email=this.value" placeholder="you@example.com" required><span class="err">Please enter a valid email address.</span></div>
+          ${mode==='register'?`
+          <div class="fg ${e.auth_country?'invalid':''}"><label>Country of residence <span class="req-star">*</span></label>
+            <select onchange="state.authForm.country=this.value" required>
+              <option value="" ${!f.country?'selected':''} disabled>Select country</option>
+              ${COUNTRIES.map(c=>`<option ${f.country===c.name?'selected':''}>${c.name}</option>`).join('')}
+            </select>
+            <span class="err">Please select your country.</span>
+          </div>
+          <div class="fg ${e.auth_phone?'invalid':''}">
+            <label>Phone number <span class="req-star">*</span></label>
+            <div class="phone-field">
+              <select onchange="state.authForm.dialCode=this.value" disabled style="background:var(--bg);">
+                <option>${countryDial(f.country)}</option>
+              </select>
+              <input type="tel" value="${f.phone}" oninput="state.authForm.phone=this.value.replace(/[^0-9]/g,'')" placeholder="1XXXXXXXXX" required style="flex:1;">
+            </div>
+            <span class="err">Please enter a valid phone number (select a country first).</span>
+          </div>
+          `:''}
+          <div class="fg ${e.auth_password?'invalid':''}">
+            <label>Password <span class="req-star">*</span></label>
+            <div class="pw-wrap">
+              <input type="${state.showPassword?'text':'password'}" id="authPasswordInput" value="${f.password}" oninput="state.authForm.password=this.value;updatePasswordMeter();" placeholder="••••••••" required>
+              <button type="button" class="pw-toggle" onclick="togglePasswordVisibility()">${state.showPassword?'Hide':'Show'}</button>
+            </div>
+            ${mode==='register'?`<div id="pwMeterWrap">${passwordMeterHTML(f.password)}</div>` : ''}
+            <span class="err">Please enter your password.</span>
+          </div>
+          ${mode==='register'?`
+          <div class="fg ${e.auth_confirm?'invalid':''}">
+            <label>Confirm password <span class="req-star">*</span></label>
+            <div class="pw-wrap">
+              <input type="${state.showConfirm?'text':'password'}" value="${f.confirm}" oninput="state.authForm.confirm=this.value" placeholder="••••••••" required>
+              <button type="button" class="pw-toggle" onclick="state.showConfirm=!state.showConfirm;render();">${state.showConfirm?'Hide':'Show'}</button>
+            </div>
+            <span class="err">Passwords don't match.</span>
+          </div>
+          <label class="chk-row terms"><input type="checkbox" ${f.agree?'checked':''} onchange="state.authForm.agree=this.checked"> I agree to the Terms &amp; Conditions and Privacy Policy, and confirm the details above are accurate.</label>
+          ${e.auth_agree?'<div class="err" style="display:block;">Please accept the terms to continue.</div>':''}
+          `:`<div style="text-align:right;"><a href="#" class="edit-link" onclick="event.preventDefault();showToast('Password reset requires a real backend and email delivery')">Forgot password?</a></div>`}
+          ${captchaWidget('auth')}
+          ${e.auth_captcha?'<div class="err" style="display:block;">Please confirm you\'re not a robot.</div>':''}
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:16px;" onclick="submitAuth('${mode}')">${mode==='login'?'Log in':'Create account'}</button>
+        <div class="security-note">🔒 <span>This is a front-end demo: your password stays in this browser tab only and is never transmitted or stored. A production build would hash passwords server-side, use HTTPS, add rate-limiting and 2-factor login, and use a real bot-detection service behind this human check.</span></div>
+        <div class="admin-entry-link">${state.adminAuth ? `✓ Signed in to Admin Portal as ${state.adminAuth.email} — <a href="#" onclick="event.preventDefault();goAdminDashboard();">Go to dashboard</a> · <a href="#" onclick="event.preventDefault();adminLogout();">Log out</a>` : `Mohammad Travels staff? <a href="#" onclick="event.preventDefault();goAdminDashboard();">Admin login →</a>`}</div>
+      </div>
+    </div>
+  </div>`;
+}
+function captchaWidget(key){
+  const c=state.captcha[key];
+  return `<div class="captcha-box ${c.checked?'checked':''}" onclick="${c.checked?'':`verifyHuman('${key}')`}">
+    <div class="captcha-checkbox ${c.checked?'checked':''}">${c.loading?'<span class="captcha-spinner"></span>':(c.checked?'✓':'')}</div>
+    <div class="captcha-label">${c.checked?"You're verified — not a robot":"I'm not a robot"}</div>
+    <div class="captcha-brand"><div class="mark">🛡️</div>Mohammad Travels<br>Verify</div>
+  </div>`;
+}
+function verifyHuman(key){
+  if(state.captcha[key].checked || state.captcha[key].loading) return;
+  state.captcha[key].loading=true; render();
+  setTimeout(()=>{ state.captcha[key].loading=false; state.captcha[key].checked=true; render(); }, 850);
+}
+function countryDial(name){ const c=COUNTRIES.find(x=>x.name===name); return c?c.dial:'+—'; }
+function switchAuthMode(mode){ state.errors={}; state.captcha.auth={checked:false,loading:false}; navigate(mode); }
+function passwordStrength(pw){
+  if(!pw) return {score:0,label:'',color:'var(--ink-faint)'};
+  let score=0;
+  if(pw.length>=8) score++;
+  if(/[A-Za-z]/.test(pw)&&/[0-9]/.test(pw)) score++;
+  if(/[^A-Za-z0-9]/.test(pw)) score++;
+  if(pw.length>=12) score++;
+  const labels=['Too short','Weak','Fair','Good','Strong'];
+  const colors=['var(--coral)','var(--coral)','#B8860B','#8BB33F','var(--success)'];
+  return {score, label:labels[score], color:colors[score]};
+}
+/* passwordMeterHTML() / updatePasswordMeter(): the live strength meter used
+   to be refreshed by re-rendering the ENTIRE page on every keystroke, which
+   destroyed and recreated the <input> each time — the browser drops focus
+   from an input the instant its DOM node is replaced, so typing a password
+   only ever registered one character before you had to click back in. The
+   fix is to update just this meter's own subtree, leaving the input (and
+   its focus/cursor position) completely untouched while you type. */
+function passwordMeterHTML(pw){
+  const s = passwordStrength(pw);
+  return `<div class="pw-meter"><i class="${s.score>=1?'on'+s.score:''}"></i><i class="${s.score>=2?'on'+s.score:''}"></i><i class="${s.score>=3?'on'+s.score:''}"></i><i class="${s.score>=4?'on'+s.score:''}"></i></div>
+  <div class="pw-label" style="color:${s.color}">${s.label}</div>
+  <div class="pw-reqs">
+    <div class="${pw.length>=8?'ok':''}">${pw.length>=8?'✓':'•'} At least 8 characters</div>
+    <div class="${/[A-Za-z]/.test(pw)&&/[0-9]/.test(pw)?'ok':''}">${/[A-Za-z]/.test(pw)&&/[0-9]/.test(pw)?'✓':'•'} Letters and numbers</div>
+    <div class="${/[^A-Za-z0-9]/.test(pw)?'ok':''}">${/[^A-Za-z0-9]/.test(pw)?'✓':'•'} One special character (recommended)</div>
+  </div>`;
+}
+function updatePasswordMeter(){
+  const el = document.getElementById('pwMeterWrap');
+  if(el) el.innerHTML = passwordMeterHTML(state.authForm.password);
+}
+function togglePasswordVisibility(){
+  state.showPassword=!state.showPassword;
+  render();
+  const input=document.getElementById('authPasswordInput');
+  if(input){ input.focus(); const v=input.value; input.value=''; input.value=v; }
+}
+function submitAuth(mode){
+  const f=state.authForm; const errors={};
+  if(mode==='register' && !f.name.trim()) errors.auth_name=true;
+  if(!f.email.includes('@')||!f.email.includes('.')) errors.auth_email=true;
+  if(mode==='register'){
+    if(!f.country) errors.auth_country=true;
+    if(!f.phone || f.phone.length<7) errors.auth_phone=true;
+    const strong = f.password.length>=8 && /[A-Za-z]/.test(f.password) && /[0-9]/.test(f.password);
+    if(!strong) errors.auth_password=true;
+    if(f.confirm!==f.password || !f.confirm) errors.auth_confirm=true;
+    if(!f.agree) errors.auth_agree=true;
+  } else {
+    if(!f.password) errors.auth_password=true;
+  }
+  if(!state.captcha.auth.checked) errors.auth_captcha=true;
+  state.errors=errors;
+  if(Object.keys(errors).length){ render(); showToast('Please complete the required fields'); return; }
+
+  if(mode==='login'){
+    const existing = state.registeredUsers.find(u=>u.email.toLowerCase()===f.email.trim().toLowerCase());
+    if(!existing){
+      // No account found for this email — hand off straight to registration,
+      // per the "one button" flow: login and sign-up share a single entry
+      // point, so an unrecognized email should lead to creating an account
+      // rather than silently logging in with an empty profile.
+      state.authForm={...f, name:'', country:'', phone:'', confirm:'', agree:false};
+      state.errors={};
+      state.captcha.auth={checked:false,loading:false};
+      state.view='register';
+      showToast("We couldn't find an account for that email — let's get you registered.");
+      render();
+      return;
+    }
+    state.user = existing;
+    showToast('Logged in');
+  } else {
+    const profile = {name:f.name.trim(), email:f.email.trim(), phone:f.phone, dialCode:countryDial(f.country), country:f.country};
+    state.registeredUsers = state.registeredUsers.filter(u=>u.email.toLowerCase()!==profile.email.toLowerCase());
+    state.registeredUsers.push(profile);
+    state.user = profile;
+    showToast('Account created — you\'re logged in');
+  }
+  state.authForm={name:'',email:'',phone:'',country:'',password:'',confirm:'',agree:false};
+  state.errors={};
+  state.captcha.auth={checked:false,loading:false};
+  state.view='home'; render();
+}
+function logoutUser(){ state.user=null; state.acctMenuOpen=false; showToast('Logged out'); render(); }
+
+/* ---------------- HOTELS ---------------- */
+const HOTELS=[
+  {id:1,name:'Marina Bay Heights',city:'Singapore',stars:5,rating:9.1,price:18500,desc:'Waterfront tower with skyline views, 10 min from Changi.'},
+  {id:2,name:'Orchard Garden Suites',city:'Singapore',stars:4,rating:8.6,price:11200,desc:'Boutique stay steps from Orchard Road shopping.'},
+  {id:3,name:'Sentosa Cove Resort',city:'Singapore',stars:5,rating:9.3,price:22800,desc:'Beachfront resort with private cabanas.'},
+  {id:4,name:'Riverside Business Hotel',city:'Singapore',stars:3,rating:8.0,price:7600,desc:'Simple, central, and well connected to the MRT.'},
+  {id:5,name:'Downtown Skyline Inn',city:'Dubai',stars:4,rating:8.4,price:15400,desc:'Close to Downtown Dubai and the Metro.'},
+  {id:6,name:'Palm Coast Resort',city:'Dubai',stars:5,rating:9.4,price:26900,desc:'Private beach access on Palm Jumeirah.'},
+];
+function hotelsForCity(city){ return HOTELS.filter(h=>h.city.toLowerCase()===city.toLowerCase()); }
+function hotelsHTML(){
+  const list = hotelsForCity(state.hotelSearch.city);
+  return `
+  <div class="page-hero"><div class="container"><h1>Find your stay</h1><p>Hotels shown are illustrative — connect a live hotel-supplier feed for real availability and pricing.</p></div></div>
+  <div class="container">
+    <div class="hotel-searchbar">
+      <div class="fg"><label>Destination</label>
+        <select onchange="state.hotelSearch.city=this.value;render();">
+          ${['Singapore','Dubai'].map(c=>`<option ${state.hotelSearch.city===c?'selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fg"><label>Check-in</label><input type="date" value="${state.hotelSearch.checkin}" onchange="state.hotelSearch.checkin=this.value"></div>
+      <div class="fg"><label>Check-out</label><input type="date" value="${state.hotelSearch.checkout}" onchange="state.hotelSearch.checkout=this.value"></div>
+      <div class="fg"><label>Guests</label>
+        <select onchange="state.hotelSearch.guests=this.value">${[1,2,3,4].map(n=>`<option ${state.hotelSearch.guests==n?'selected':''}>${n}</option>`).join('')}</select>
+      </div>
+      <button class="btn btn-primary" onclick="render()">Search hotels</button>
+    </div>
+    <div class="page-body" style="padding-left:0;padding-right:0;">
+      <div style="font-weight:700;font-size:15px;margin-bottom:4px;">${list.length} hotels in ${state.hotelSearch.city}</div>
+      <div class="hotel-grid">
+        ${list.map(h=>`
+          <div class="hotel-card" onclick="viewHotel(${h.id})">
+            <div class="hotel-img">${h.name}</div>
+            <div class="hotel-body">
+              <div class="hotel-stars">${'★'.repeat(h.stars)}${'☆'.repeat(5-h.stars)}</div>
+              <div class="hotel-name">${h.name}</div>
+              <div class="hotel-loc">${h.city} · <span class="rating-pill">${h.rating}</span></div>
+              <div class="hotel-foot"><div class="hotel-price">${fmtMoney(h.price)}<span>per night</span></div><button class="btn btn-outline" style="padding:7px 12px;font-size:13px;">View</button></div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+function viewHotel(id){ state.selectedHotel=HOTELS.find(h=>h.id===id); state.view='hotelDetail'; render(); }
+function hotelDetailHTML(){
+  const h=state.selectedHotel;
+  const nights = Math.max(1, Math.round((new Date(state.hotelSearch.checkout)-new Date(state.hotelSearch.checkin))/86400000));
+  const rooms=[
+    {name:'Standard Room',meta:'City view · Free cancellation',price:h.price},
+    {name:'Deluxe Room',meta:'Higher floor · Breakfast included',price:Math.round(h.price*1.25),reco:true},
+    {name:'Suite',meta:'Separate living area · Late checkout',price:Math.round(h.price*1.7)},
+  ];
+  return `<div class="page-body">
+    <a href="#" class="edit-link" onclick="state.view='hotels';render();return false;">← Back to hotels</a>
+    <div class="card" style="margin-top:14px;">
+      <div class="hotel-stars">${'★'.repeat(h.stars)}${'☆'.repeat(5-h.stars)}</div>
+      <h3>${h.name}</h3>
+      <div class="card-sub">${h.city} · <span class="rating-pill">${h.rating}</span> · ${nights} night${nights!==1?'s':''}, ${state.hotelSearch.guests} guest${state.hotelSearch.guests!=1?'s':''}</div>
+      <p style="font-size:14px;color:var(--ink-soft);">${h.desc}</p>
+    </div>
+    <div class="card">
+      <h3>Choose a room</h3>
+      ${rooms.map(r=>`
+        <div class="room-option ${r.reco?'reco':''}">
+          <div><div class="room-name">${r.name} ${r.reco?'<span class="badge-scope" style="background:#FDF1DF;">Recommended</span>':''}</div><div class="room-meta">${r.meta}</div></div>
+          <div style="text-align:right;">
+            <div style="font-weight:700;color:var(--navy);">${fmtMoney(r.price*nights)}</div>
+            <div style="font-size:11.5px;color:var(--ink-faint);margin-bottom:8px;">${fmtMoney(r.price)} × ${nights} night${nights!==1?'s':''}</div>
+            <button class="btn btn-primary" style="padding:8px 16px;" onclick="bookHotel('${r.name}',${r.price*nights})">Book now</button>
+          </div>
+        </div>`).join('')}
+    </div>
+  </div>`;
+}
+function bookHotel(roomName,total){
+  state.hotelBookingRef='MTH'+Math.random().toString(36).slice(2,7).toUpperCase();
+  notifyAdmin('hotel', {
+    bookingRef: state.hotelBookingRef,
+    hotel: state.selectedHotel.name, room:roomName,
+    total: fmtMoney(total), totalAmount: total,
+    ticketIssued:false,
+    agent: state.agencyUser ? state.agencyUser.agencyName : null,
+  });
+  logActivity('New hotel booking: '+state.hotelBookingRef+' ('+state.selectedHotel.name+')');
+  showToast(`Room reserved — ${roomName}, ${fmtMoney(total)} total. Reference ${state.hotelBookingRef}. Admin notified for ticketing.`);
+  state.view='hotels'; render();
+}
+
+/* ---------------- VISA ---------------- */
+function visaHTML(){
+  const f=state.visaForm;
+  return `
+  <div class="page-hero"><div class="container"><h1>Visa assistance</h1><p>We help you understand requirements and prepare your application — always based on current official guidance, never guessed.</p></div></div>
+  <div class="page-body" style="max-width:640px;">
+    <div class="card">
+      <h3>Request visa guidance</h3>
+      <div class="card-sub">Tell us your nationality and destination, and our visa team will confirm exact requirements — we don't display invented visa rules.</div>
+      <div class="form-grid">
+        <div class="fg"><label>Full name</label><input type="text" value="${f.name}" oninput="state.visaForm.name=this.value"></div>
+        <div class="fg"><label>Email</label><input type="email" value="${f.email}" oninput="state.visaForm.email=this.value"></div>
+        <div class="fg"><label>Nationality</label><input type="text" value="${f.nationality}" oninput="state.visaForm.nationality=this.value" placeholder="e.g. Bangladeshi"></div>
+        <div class="fg"><label>Destination country</label><input type="text" value="${f.destination}" oninput="state.visaForm.destination=this.value" placeholder="e.g. Singapore"></div>
+        <div class="fg" style="grid-column:1/-1;"><label>Planned travel date</label><input type="date" value="${f.date}" oninput="state.visaForm.date=this.value"></div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:16px;" onclick="submitVisa()">Request visa guidance</button>
+    </div>
+  </div>`;
+}
+function submitVisa(){
+  const f=state.visaForm;
+  if(!f.name.trim()||!f.email.includes('@')||!f.nationality.trim()||!f.destination.trim()){ showToast('Please fill in all fields'); return; }
+  showToast(`Thanks ${f.name.split(' ')[0]} — our visa team will email requirements for ${f.destination} to ${f.email}.`);
+  state.visaForm={name:'',email:'',nationality:'',destination:'',date:''};
+  render();
+}
+
+/* ---------------- TRAVEL SERVICES ---------------- */
+const SERVICES=[
+  {id:'insurance',icon:'🛡️',name:'Travel insurance',desc:'Cover medical, baggage and trip cancellation for your journey.'},
+  {id:'transfer',icon:'🚐',name:'Airport transfer',desc:'Pre-booked pickup and drop-off at your destination.'},
+  {id:'group',icon:'👥',name:'Group bookings',desc:'Fares and coordination for 10+ travellers.'},
+  {id:'package',icon:'🏝️',name:'Holiday packages',desc:'Flight + hotel bundles for a complete trip.'},
+  {id:'meet',icon:'🛬',name:'Meet &amp; assist',desc:'Airport staff assistance for elderly or first-time flyers.'},
+  {id:'esim',icon:'📶',name:'Travel eSIM',desc:'Stay connected abroad with a data plan for your destination.'},
+];
+function travelServicesHTML(){
+  const f=state.serviceForm;
+  return `
+  <div class="page-hero"><div class="container"><h1>Travel services</h1><p>Everything around your flight, handled by our team.</p></div></div>
+  <div class="page-body">
+    <div class="service-grid">
+      ${SERVICES.map(s=>`
+        <div class="service-card">
+          <div class="service-icon">${s.icon}</div>
+          <h3>${s.name}</h3>
+          <p>${s.desc}</p>
+          <button class="btn btn-outline" onclick="openServiceForm('${s.id}','${s.name}')">Request this service</button>
+        </div>`).join('')}
+    </div>
+    ${f.service ? `
+    <div class="card" id="serviceFormCard" style="margin-top:26px;">
+      <h3>Request: ${f.service}</h3>
+      <div class="form-grid">
+        <div class="fg"><label>Your name</label><input type="text" value="${f.name}" oninput="state.serviceForm.name=this.value"></div>
+        <div class="fg"><label>Email</label><input type="email" value="${f.email}" oninput="state.serviceForm.email=this.value"></div>
+        <div class="fg" style="grid-column:1/-1;"><label>Details</label><input type="text" value="${f.notes}" oninput="state.serviceForm.notes=this.value" placeholder="Dates, number of travellers, etc."></div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:14px;" onclick="submitService()">Send request</button>
+    </div>` : ''}
+  </div>`;
+}
+function openServiceForm(id,name){ state.serviceForm={service:name,name:'',email:'',notes:''}; render(); setTimeout(()=>{const el=document.getElementById('serviceFormCard'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'});},20); }
+function submitService(){
+  const f=state.serviceForm;
+  if(!f.name.trim()||!f.email.includes('@')){ showToast('Please add your name and a valid email'); return; }
+  showToast(`Request sent — our team will contact you about ${f.service}.`);
+  state.serviceForm={service:'',name:'',email:'',notes:''};
+  render();
+}
+
+/* ---------------- OFFERS ---------------- */
+function offersHTML(){
+  const deals=[
+    {code:'SIN',city:'Singapore',price:39500,tag:'Ends in 3 days'},
+    {code:'BKK',city:'Bangkok',price:24900,tag:'Limited seats'},
+    {code:'DXB',city:'Dubai',price:47800,tag:'New route'},
+    {code:'KUL',city:'Kuala Lumpur',price:27300,tag:'Weekend deal'},
+    {code:'JED',city:'Jeddah',price:55200,tag:'Ends in 5 days'},
+    {code:'DOH',city:'Doha',price:44100,tag:'Limited seats'},
+  ];
+  return `
+  <div class="page-hero"><div class="container"><h1>Best flight deals</h1><p>Fares shown are illustrative starting prices — live pricing comes from our supplier feed.</p></div></div>
+  <div class="page-body">
+    <div class="offer-grid">
+      ${deals.map(d=>`
+        <div class="offer-card">
+          <div class="offer-img"><span>${state.from.city} → ${d.city}</span><span class="offer-badge">${d.tag}</span></div>
+          <div class="offer-body">
+            <div style="font-size:12.5px;color:var(--ink-faint);">From</div>
+            <div style="font-size:19px;font-weight:700;color:var(--navy);margin-bottom:10px;">${fmtMoney(d.price)}</div>
+            <button class="btn btn-primary" style="width:100%;" onclick="pickDestination('${d.code}')">Explore</button>
+          </div>
+        </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+/* ---------------- MY BOOKING ---------------- */
+/* Real, verified official airline homepages — ALL Asia + Middle East, per
+   request, with Europe/N.America/Oceania/Africa carriers removed. Verified
+   via extensive web search on 2026-09-09 rather than assumed from memory.
+   This round of checking caught real, current changes that recall alone
+   would have missed:
+     - Vistara no longer exists — merged into Air India, Nov 2024 (removed;
+       Akasa Air used instead as India's current major LCC)
+     - Cambodia Angkor Air rebranded to "Air Cambodia" in Jan 2025, new
+       domain aircambodia.com
+     - Royal Brunei Airlines' real domain is flyroyalbrunei.com, not the
+       "obvious" royalbruneiairlines.com guess
+     - Novoair (flynovoair.com), US-Bangla (usbair.com), Virgin Atlantic
+       (virginatlantic.com, no hyphen) also didn't match first-guess domains
+   These are real airlines' real sites — not the fictional mock-search
+   airlines used elsewhere in this app for fare-comparison simulation. */
+const AIRLINE_REGIONS = [
+  {region:'South Asia', airlines:[
+    {name:'Biman Bangladesh Airlines', url:'https://www.biman-airlines.com'},
+    {name:'US-Bangla Airlines', url:'https://www.usbair.com'},
+    {name:'Novoair', url:'https://www.flynovoair.com'},
+    {name:'Air Astra', url:'https://www.airastra.com'},
+    {name:'Air India', url:'https://www.airindia.com'},
+    {name:'IndiGo', url:'https://www.goindigo.in'},
+    {name:'Akasa Air', url:'https://www.akasaair.com'},
+    {name:'SpiceJet', url:'https://www.spicejet.com'},
+    {name:'SriLankan Airlines', url:'https://www.srilankan.com'},
+    {name:'Pakistan International Airlines', url:'https://www.piac.com.pk'},
+    {name:'Airblue', url:'https://www.airblue.com'},
+    {name:'SereneAir', url:'https://www.sereneair.com'},
+    {name:'Nepal Airlines', url:'https://www.nepalairlines.com.np'},
+    {name:'Buddha Air', url:'https://www.buddhaair.com'},
+    {name:'Yeti Airlines', url:'https://www.yetiairlines.com'},
+    {name:'Druk Air', url:'https://www.drukair.com.bt'},
+    {name:'Maldivian', url:'https://www.maldivian.aero'},
+  ]},
+  {region:'Southeast Asia', airlines:[
+    {name:'Singapore Airlines', url:'https://www.singaporeair.com'},
+    {name:'Scoot', url:'https://www.flyscoot.com'},
+    {name:'Malaysia Airlines', url:'https://www.malaysiaairlines.com'},
+    {name:'AirAsia', url:'https://www.airasia.com'},
+    {name:'Thai Airways', url:'https://www.thaiairways.com'},
+    {name:'Bangkok Airways', url:'https://www.bangkokair.com'},
+    {name:'Garuda Indonesia', url:'https://www.garuda-indonesia.com'},
+    {name:'Lion Air', url:'https://www.lionair.co.id'},
+    {name:'Citilink', url:'https://www.citilink.co.id'},
+    {name:'Vietnam Airlines', url:'https://www.vietnamairlines.com'},
+    {name:'VietJet Air', url:'https://www.vietjetair.com'},
+    {name:'Philippine Airlines', url:'https://www.philippineairlines.com'},
+    {name:'Cebu Pacific', url:'https://www.cebupacificair.com'},
+    {name:'Myanmar Airways International', url:'https://www.maiair.com'},
+    {name:'Air Cambodia', url:'https://www.aircambodia.com'},
+    {name:'Lao Airlines', url:'https://www.laoairlines.com'},
+    {name:'Royal Brunei Airlines', url:'https://www.flyroyalbrunei.com'},
+  ]},
+  {region:'East Asia', airlines:[
+    {name:'Cathay Pacific', url:'https://www.cathaypacific.com'},
+    {name:'HK Express', url:'https://www.hkexpress.com'},
+    {name:'Hong Kong Airlines', url:'https://www.hongkongairlines.com'},
+    {name:'EVA Air', url:'https://www.evaair.com'},
+    {name:'China Airlines', url:'https://www.china-airlines.com'},
+    {name:'StarLux Airlines', url:'https://www.starlux-airlines.com'},
+    {name:'Korean Air', url:'https://www.koreanair.com'},
+    {name:'Asiana Airlines', url:'https://flyasiana.com'},
+    {name:'Jeju Air', url:'https://www.jejuair.net'},
+    {name:'All Nippon Airways (ANA)', url:'https://www.ana.co.jp/en/'},
+    {name:'Japan Airlines', url:'https://www.jal.co.jp/en/'},
+    {name:'Peach Aviation', url:'https://www.flypeach.com'},
+    {name:'China Eastern Airlines', url:'https://www.ceair.com'},
+    {name:'China Southern Airlines', url:'https://www.csair.com'},
+    {name:'Air China', url:'https://www.airchina.com'},
+    {name:'Hainan Airlines', url:'https://www.hainanairlines.com'},
+    {name:'Xiamen Airlines', url:'https://www.xiamenair.com'},
+    {name:'Sichuan Airlines', url:'https://www.sichuanair.com'},
+    {name:'Shenzhen Airlines', url:'https://www.shenzhenair.com'},
+    {name:'MIAT Mongolian Airlines', url:'https://www.miat.com'},
+  ]},
+  {region:'Central Asia', airlines:[
+    {name:'Air Astana', url:'https://www.airastana.com'},
+    {name:'Uzbekistan Airways', url:'https://www.uzairways.com'},
+  ]},
+  {region:'Middle East', airlines:[
+    {name:'Emirates', url:'https://www.emirates.com'},
+    {name:'Etihad Airways', url:'https://www.etihad.com'},
+    {name:'flydubai', url:'https://www.flydubai.com'},
+    {name:'Air Arabia', url:'https://www.airarabia.com'},
+    {name:'Qatar Airways', url:'https://www.qatarairways.com'},
+    {name:'Saudia', url:'https://www.saudia.com'},
+    {name:'flynas', url:'https://www.flynas.com'},
+    {name:'flyadeal', url:'https://www.flyadeal.com'},
+    {name:'Gulf Air', url:'https://www.gulfair.com'},
+    {name:'Oman Air', url:'https://www.omanair.com'},
+    {name:'SalamAir', url:'https://www.salamair.com'},
+    {name:'Kuwait Airways', url:'https://www.kuwaitairways.com'},
+    {name:'Jazeera Airways', url:'https://www.jazeeraairways.com'},
+    {name:'Turkish Airlines', url:'https://www.turkishairlines.com'},
+    {name:'Pegasus Airlines', url:'https://www.flypgs.com'},
+    {name:'Royal Jordanian', url:'https://www.rj.com'},
+    {name:'Middle East Airlines', url:'https://www.mea.com.lb'},
+    {name:'El Al', url:'https://www.elal.com'},
+    {name:'Iran Air', url:'https://www.iranair.com'},
+  ]},
+];
+function myBookingHTML(){
+  const q=state.myBookingQuery;
+  const u=state.user;
+  return `
+  <div class="page-hero"><div class="container"><h1>Manage your booking</h1><p>${u?'Your account details and trip lookup.':'Enter your PNR and last name to view your trip.'}</p></div></div>
+  <div class="page-body" style="max-width:520px;">
+    ${u ? `
+    <div class="card">
+      <div class="profile-card">
+        <div class="profile-avatar">${u.name[0].toUpperCase()}</div>
+        <div><div style="font-weight:700;font-size:16px;">${u.name}</div><div style="font-size:13px;color:var(--ink-faint);">${u.email}</div></div>
+      </div>
+      <div class="profile-fields">
+        <div><div class="k">Phone</div><div class="v">${u.phone?u.dialCode+' '+u.phone:'Not provided'}</div></div>
+        <div><div class="k">Country</div><div class="v">${u.country||'Not provided'}</div></div>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:8px;">
+        <button class="btn btn-outline" style="flex:1;" onclick="showToast('Editing profile details requires an account backend')">Edit details</button>
+        <button class="btn btn-outline" style="flex:1;" onclick="logoutUser()">Log out</button>
+      </div>
+    </div>` : `
+    <div class="card" style="text-align:center;">
+      <p style="font-size:14px;color:var(--ink-soft);margin:0 0 12px;">Log in to see your profile and bookings automatically.</p>
+      <button class="btn btn-primary" onclick="return navigate('login')">Log in</button>
+    </div>`}
+    <div class="card">
+      <h3>Find a booking</h3>
+      <div class="card-sub">Enter the PNR from your confirmation and the lead passenger's surname — the same details airlines ask for.</div>
+      <div class="form-grid" style="margin-bottom:16px;">
+        <div class="fg"><label>PNR</label><input type="text" value="${q.pnr}" oninput="state.myBookingQuery.pnr=this.value" placeholder="e.g. 7F3KQ" style="text-transform:uppercase;"></div>
+        <div class="fg"><label>Last name</label><input type="text" value="${q.lastName}" oninput="state.myBookingQuery.lastName=this.value" placeholder="e.g. Rahman"></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="findMyBooking()">Find my booking</button>
+    </div>
+    ${renderMyBookingResult()}
+    <div class="card">
+      <h3>Check directly with your airline</h3>
+      <div class="card-sub">If your airline handles check-in, seat selection, or schedule changes, you can go straight to their official site — all ${AIRLINE_REGIONS.reduce((n,r)=>n+r.airlines.length,0)} listed below link to that airline's real, official homepage.</div>
+      <div class="form-grid" style="grid-template-columns:1fr auto;align-items:end;">
+        <div class="fg"><label>Airline</label>
+          <select id="airlineWebsiteSelect">
+            ${AIRLINE_REGIONS.map(r=>`<optgroup label="${r.region}">${r.airlines.map(a=>`<option value="${a.url}">${a.name}</option>`).join('')}</optgroup>`).join('')}
+          </select>
+        </div>
+        <button class="btn btn-outline" onclick="goToAirlineWebsite()">Go to airline website ↗</button>
+      </div>
+    </div>
+  </div>`;
+}
+function goToAirlineWebsite(){
+  const sel=document.getElementById('airlineWebsiteSelect');
+  const url=sel.value; const name=sel.options[sel.selectedIndex].text;
+  showToast(`Opening ${name}'s official website in a new tab`);
+  window.open(url,'_blank','noopener');
+}
+function findMyBooking(){
+  const q=state.myBookingQuery;
+  if(!q.pnr.trim()||!q.lastName.trim()){ showToast('Enter both your PNR and last name'); return; }
+  const pnr = q.pnr.trim().toUpperCase();
+  const lastName = q.lastName.trim().toLowerCase();
+  const bookingLast = state.passengerForms[0] ? state.passengerForms[0].last.trim().toLowerCase() : '';
+  const matchesFlight = state.pnr && pnr===state.pnr.toUpperCase() && lastName===bookingLast;
+  const matchesHotel = state.hotelBookingRef && pnr===state.hotelBookingRef.toUpperCase();
+  if(matchesFlight){
+    state.myBookingResult = {type:'flight'};
+  } else if(matchesHotel){
+    state.myBookingResult = {type:'hotel'};
+  } else {
+    state.myBookingResult = null;
+  }
+  render();
+}
+function renderMyBookingResult(){
+  if(state.myBookingResult===undefined) return '';
+  if(state.myBookingResult===null){
+    return `<div class="card not-found-box">
+      <strong>No booking found</strong>
+      <p style="color:var(--ink-soft);font-size:13.5px;">Double-check your PNR and last name, or reach out below.</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
+        <button class="btn btn-outline" onclick="toggleAI()">Chat with us</button>
+        <button class="btn btn-outline" onclick="showToast('WhatsApp support requires the WhatsApp Business integration')">WhatsApp</button>
+      </div>
+    </div>`;
+  }
+  if(state.myBookingResult.type==='flight'){
+    const isMulti = state.tripType==='multicity';
+    return `<div class="card">
+      <h3>Trip found</h3>
+      <div class="review-row"><span>PNR</span><span>${state.pnr}</span></div>
+      <div class="review-row"><span>Route</span><span>${tripRouteLabel()}</span></div>
+      ${isMulti ? state.multiItinerary.map((l,i)=>`<div class="review-row"><span>Flight ${i+1}</span><span>${l.airline} ${airlineCode(l.airline)}${l.num} · ${fmtDate(l.date)}</span></div>`).join('')
+        : `<div class="review-row"><span>Flight</span><span>${state.selectedFlight.airline} ${airlineCode(state.selectedFlight.airline)}${state.selectedFlight.num} · ${fmtDate(state.departDate)}</span></div>`}
+      <div class="review-row"><span>Status</span><span style="color:var(--success);font-weight:700;">Confirmed</span></div>
+      <div class="confirm-actions">
+        <button class="btn btn-outline" onclick="showToast('E-ticket download connects to ticketing in production')">Download ticket</button>
+        <button class="btn btn-outline" onclick="showToast('Cancellation requests route to a human agent in production')">Request cancellation</button>
+      </div>
+    </div>`;
+  }
+  return `<div class="card">
+    <h3>Hotel booking found</h3>
+    <div class="review-row"><span>Reference</span><span>${state.hotelBookingRef}</span></div>
+    <div class="review-row"><span>Hotel</span><span>${state.selectedHotel?state.selectedHotel.name:'—'}</span></div>
+    <div class="review-row"><span>Status</span><span style="color:var(--success);font-weight:700;">Confirmed</span></div>
+  </div>`;
+}
+
+/* ---------------- HELP CENTRE ---------------- */
+const FAQS=[
+  {q:'How do I change or cancel my flight?',a:'Go to Manage Booking, retrieve your trip with your PNR and last name, then choose Request change or Request cancellation.'},
+  {q:'What baggage allowance do I get?',a:'Baggage varies by fare and airline — it is shown on every flight card and again in your booking confirmation.'},
+  {q:'How do I get an e-ticket or invoice?',a:'Both are available from your confirmation page and from My Booking once your payment is confirmed.'},
+  {q:'Which payment methods are supported?',a:'Card, mobile payment, and bank transfer are shown at checkout — availability depends on your market.'},
+  {q:'Do I need a visa for my destination?',a:'Requirements depend on your nationality and destination. Use the Visa page to request current, verified guidance from our team.'},
+];
+function helpHTML(){
+  return `
+  <div class="page-hero"><div class="container"><h1>Help centre</h1><p>Answers to common questions, or reach a real person.</p></div></div>
+  <div class="page-body" style="max-width:720px;">
+    <div class="card">
+      ${FAQS.map((f,i)=>`
+        <div class="faq-item ${state.faqOpen.has(i)?'open':''}">
+          <div class="faq-q" onclick="toggleFaq(${i})"><span>${f.q}</span><span class="chev">▾</span></div>
+          <div class="faq-a">${f.a}</div>
+        </div>`).join('')}
+    </div>
+    <div class="support-grid">
+      <div class="support-card"><div class="icon">💬</div><strong>Chat</strong><p style="font-size:12.5px;color:var(--ink-soft);">Talk to our AI assistant</p><button class="btn btn-outline" style="margin-top:8px;width:100%;" onclick="toggleAI()">Open chat</button></div>
+      <div class="support-card"><div class="icon">📱</div><strong>WhatsApp</strong><p style="font-size:12.5px;color:var(--ink-soft);">Message us anytime</p><button class="btn btn-outline" style="margin-top:8px;width:100%;" onclick="showToast('WhatsApp Business integration required')">Message us</button></div>
+      <div class="support-card"><div class="icon">📞</div><strong>Call us</strong><p style="font-size:12.5px;color:var(--ink-soft);">Speak to an agent</p><button class="btn btn-outline" style="margin-top:8px;width:100%;" onclick="showToast('Call routing requires telephony integration')">Call</button></div>
+      <div class="support-card"><div class="icon">✉️</div><strong>Email</strong><p style="font-size:12.5px;color:var(--ink-soft);">We reply within 24h</p><button class="btn btn-outline" style="margin-top:8px;width:100%;" onclick="showToast('Email support requires a helpdesk integration')">Email us</button></div>
+    </div>
+  </div>`;
+}
+function toggleFaq(i){ state.faqOpen.has(i)?state.faqOpen.delete(i):state.faqOpen.add(i); render(); }
+
+/* ---------------- ADMIN CONSOLE (demo) ----------------
+   A stand-in for the ops dashboard a real ticketing/payments team would use.
+   Populated only by notifyAdmin() calls made during this browser session —
+   nothing here is persisted or sent anywhere. */
+/* ================================================================
+   ADMIN PORTAL — gated login + full Admin Dashboard
+   ================================================================
+   IMPORTANT, stated plainly and repeatedly because it matters: this is a
+   static, front-end-only file. The gate below (state.adminAuth) hides menu
+   items and pages the same way the rest of this prototype does — it is
+   NOT real access control. Anyone who edits the page's JavaScript in dev
+   tools can bypass it instantly. Real admin security has to be enforced
+   on a server that the browser cannot modify: hashed credential checks,
+   server-side session/JWT validation, and role checks on every single
+   API endpoint — never just "hide the button in the UI." */
+function requireAdmin(){
+  return !!state.adminAuth;
+}
+function goAdminDashboard(tab){
+  if(!requireAdmin()){ state.view='adminPortalLogin'; render(); return; }
+  state.adminTab = tab || state.adminTab || 'dashboard';
+  state.view='adminDashboard';
+  render();
+}
+/* Demo-only test credentials, shown openly on the login screen itself since
+   this demo checks no real account (see the security note below). This is
+   NOT a real admin's email/password — it's a fake @...demo address invented
+   for this prototype, unlike a real credential, it's fine to display in the
+   UI because nothing behind it is real. */
+const ADMIN_DEMO_CREDENTIALS = {email:'admin@mohammadtravels.demo', password:'Demo@1234'};
+function fillAdminDemoCredentials(){
+  state.adminLoginForm = {...ADMIN_DEMO_CREDENTIALS};
+  render();
+}
+function adminPortalLoginHTML(){
+  if(state.adminAuth){
+    return `<div class="page-body">
+      <div class="auth-wrap" style="max-width:420px;">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:30px;">✓</div>
+          <h3 style="margin:6px 0 2px;">You're already logged in</h3>
+          <p style="color:var(--ink-soft);font-size:13.5px;">Signed in to the Admin Portal as <strong>${state.adminAuth.email}</strong>. Log out first if you want to switch accounts.</p>
+          <div style="display:flex;gap:10px;margin-top:14px;">
+            <button class="btn btn-outline" style="flex:1;" onclick="adminLogout()">Log out</button>
+            <button class="btn btn-primary" style="flex:1;" onclick="goAdminDashboard()">Go to dashboard</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+  const f=state.adminLoginForm; const e=state.errors;
+  return `<div class="page-body">
+    <div class="auth-wrap" style="max-width:420px;">
+      <div class="card" style="border-top:3px solid var(--navy);">
+        <div class="hc-badge" style="background:#EAF1F8;color:var(--navy);border-color:#CBD9E8;">Staff only</div>
+        <h3 style="margin-top:8px;">Admin Portal</h3>
+        <div class="card-sub">Mohammad Travels internal administration. Not for customer or agency use.</div>
+        <div class="demo-cred-box">
+          🧪 <div><strong>For testing:</strong> ${ADMIN_DEMO_CREDENTIALS.email} / ${ADMIN_DEMO_CREDENTIALS.password}
+          <button type="button" class="btn-text" style="padding:0 0 0 6px;" onclick="fillAdminDemoCredentials()">Autofill</button></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="fg ${e.admin_login?'invalid':''}"><label>Email</label><input type="email" value="${f.email}" oninput="state.adminLoginForm.email=this.value" placeholder="you@mohammadtravels.example"><span class="err">Invalid email or password.</span></div>
+          <div class="fg ${e.admin_login?'invalid':''}">
+            <label>Password</label>
+            <div class="pw-wrap">
+              <input type="${state.showAdminPassword?'text':'password'}" value="${f.password}" oninput="state.adminLoginForm.password=this.value" placeholder="••••••••">
+              <button type="button" class="pw-toggle" onclick="state.showAdminPassword=!state.showAdminPassword;render();">${state.showAdminPassword?'Hide':'Show'}</button>
+            </div>
+          </div>
+          ${captchaWidget('admin')}
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:16px;" onclick="submitAdminLogin()">Log in to Admin Portal</button>
+        <div class="security-note">🔒 <span>This demo accepts any well-formed email + non-empty password (or the test credentials above) — it does not check a real account. A real admin credential is intentionally NOT hardcoded here: a static page cannot hide a password from anyone viewing its source, so baking a real one into this file would expose it, not protect it. A production build authenticates against a server-side user store with hashed passwords.</span></div>
+      </div>
+    </div>
+  </div>`;
+}
+function submitAdminLogin(){
+  const f=state.adminLoginForm;
+  const valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email) && f.password.length>0 && state.captcha.admin.checked;
+  if(!valid){ state.errors={admin_login:true}; render(); showToast('Invalid email or password'); return; }
+  state.adminAuth = {email:f.email};
+  state.adminLoginForm={email:'',password:''};
+  state.captcha.admin={checked:false,loading:false};
+  state.errors={};
+  logActivity('Admin logged in ('+state.adminAuth.email+')');
+  state.adminTab='dashboard';
+  state.view='adminDashboard';
+  render();
+}
+function adminLogout(){
+  logActivity('Admin logged out ('+(state.adminAuth?state.adminAuth.email:'')+')');
+  state.adminAuth=null; state.view='home'; render();
+}
+const ADMIN_SIDEBAR = [
+  ['dashboard','📊','Dashboard'],
+  ['partners','🤝','B2B Partners'],
+  ['fareCollection','🔍','Fare Collection'],
+  ['bookings','🧾','Bookings'],
+  ['pricing','💰','Pricing & Markup'],
+  ['activityLogs','📜','Activity Logs'],
+  ['settings','⚙️','Settings'],
+];
+function adminDashboardHTML(){
+  if(!requireAdmin()) return adminPortalLoginHTML();
+  const tab = state.adminTab;
+  const bodies = {
+    dashboard: adminTabDashboard(),
+    partners: adminTabPartners(),
+    fareCollection: adminTabFareCollection(),
+    bookings: adminTabBookings(),
+    pricing: adminTabPricing(),
+    activityLogs: adminTabActivityLogs(),
+    settings: adminTabSettings(),
+  };
+  return `
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-head">MOHAMMAD TRAVELS<br><span>Admin Portal</span></div>
+      <nav>
+        ${ADMIN_SIDEBAR.map(([key,icon,label])=>`<button class="admin-nav-item ${tab===key?'active':''}" onclick="goAdminDashboard('${key}')">${icon} ${label}</button>`).join('')}
+        <button class="admin-nav-item" onclick="adminLogout()">↩ Logout</button>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <div style="font-weight:700;">${ADMIN_SIDEBAR.find(s=>s[0]===tab) ? ADMIN_SIDEBAR.find(s=>s[0]===tab)[2] : 'Dashboard'}</div>
+        <div style="font-size:12.5px;color:var(--ink-faint);">${state.adminAuth.email}</div>
+      </div>
+      <div class="admin-content">${bodies[tab] || bodies.dashboard}</div>
+    </main>
+  </div>`;
+}
+
+function adminTabDashboard(){
+  const notes = state.adminNotifications;
+  const bookings = notes.filter(n=>n.kind==='flight'||n.kind==='hotel');
+  const revenue = bookings.reduce((s,n)=>s+(n.totalAmount||0),0);
+  const pendingTickets = bookings.filter(n=>!n.ticketIssued).length;
+  const activePartners = state.supplierConnections.filter(c=>c.status==='active').length;
+  const partnerErrors = state.supplierConnections.filter(c=>c.status==='login_failed'||c.status==='session_expired').length;
+  const stats = [
+    ['Total bookings', bookings.length],
+    ["Today's bookings", bookings.length],
+    ['Revenue', fmtMoney(revenue)],
+    ['Pending tickets', pendingTickets],
+    ['Active B2B partners', activePartners],
+    ['Partner errors', partnerErrors],
+    ['Fare searches this session', state.fareSearchCount],
+  ];
+  const maxCount = Math.max(1, bookings.length, state.fareSearchCount);
+  return `
+  <div class="admin-stat-grid">
+    ${stats.map(([label,val])=>`<div class="admin-stat-card"><div class="v">${val}</div><div class="l">${label}</div></div>`).join('')}
+  </div>
+  <div class="card">
+    <h3>Session activity</h3>
+    <div class="card-sub">A simple illustrative chart — a production dashboard would show real historical bookings and revenue trends.</div>
+    <div class="mini-chart">
+      <div class="mini-bar-wrap"><div class="mini-bar" style="height:${Math.round(bookings.length/maxCount*100)}%"></div><div class="mini-bar-label">Bookings</div></div>
+      <div class="mini-bar-wrap"><div class="mini-bar" style="height:${Math.round(state.fareSearchCount/maxCount*100)}%"></div><div class="mini-bar-label">Searches</div></div>
+      <div class="mini-bar-wrap"><div class="mini-bar" style="height:${Math.round(activePartners/Math.max(1,state.supplierConnections.length||1)*100)}%"></div><div class="mini-bar-label">Partners up</div></div>
+    </div>
+  </div>`;
+}
+
+/* ---------------- B2B PARTNERS TAB ----------------
+   CRITICAL LIMITATION, stated plainly: any password typed into the field
+   below is read once by this form and then discarded — it is never added
+   to this app's data, never written anywhere, and would be fully visible
+   to anyone opening the browser's dev tools if it were kept. A real build
+   must never let the browser see these credentials at all: this form
+   should submit straight to a server over HTTPS, which alone stores the
+   credential (encrypted, in a secrets vault) and uses it to log in and
+   fetch fares — the browser only ever gets back the resulting prices. */
+const STATUS_META = {
+  active: {dot:'🟢', label:'Connected'},
+  verification_required: {dot:'🟡', label:'Verification required'},
+  session_expired: {dot:'🟠', label:'Session expired'},
+  login_failed: {dot:'🔴', label:'Login failed'},
+  disabled: {dot:'⚫', label:'Disabled'},
+};
+function adminTabPartners(){
+  const f=state.supplierForm;
+  return `
+  <div class="security-note" style="margin-bottom:16px;">⚠️ <span><strong>Passwords are never stored by this demo.</strong> The field below is read once on save and immediately discarded — not kept in this app's data, and never displayed again. See the comment above this section in the source for what a real implementation must do instead.</span></div>
+  <div class="card">
+    <h3>Add a B2B partner</h3>
+    <div class="form-grid">
+      <div class="fg"><label>Partner name</label><input type="text" id="supplierNameInput" value="${f.name}" oninput="state.supplierForm.name=this.value" placeholder="e.g. Partner A"></div>
+      <div class="fg"><label>Portal login URL</label><input type="text" id="supplierUrlInput" value="${f.portalUrl}" oninput="state.supplierForm.portalUrl=this.value" placeholder="https://agent.example.com"></div>
+      <div class="fg"><label>Username / Login ID</label><input type="text" id="supplierUserInput" value="${f.username}" oninput="state.supplierForm.username=this.value" placeholder="mohammadtravels_agent"></div>
+      <div class="fg"><label>Password</label><input type="password" id="supplierPassInput" placeholder="Not stored — see note above"></div>
+      <div class="fg"><label>Status</label><select id="supplierStatusInput"><option value="active">Active</option><option value="disabled">Inactive</option><option value="verification_required">Suspended (needs verification)</option></select></div>
+      <div class="fg" style="grid-column:1/-1;"><label>Description / notes</label><input type="text" id="supplierNotesInput" value="${f.notes}" oninput="state.supplierForm.notes=this.value" placeholder="Optional internal notes"></div>
+    </div>
+    <button class="btn btn-primary" style="margin-top:14px;" onclick="addSupplierConnection()">Save partner</button>
+  </div>
+  <div class="card">
+    <h3>Partners (${state.supplierConnections.length})</h3>
+    ${state.supplierConnections.length===0 ? `<p style="color:var(--ink-faint);font-size:13.5px;">No partners added yet — automatic fare-checking currently uses generic placeholder sources.</p>` :
+    state.supplierConnections.map(c=>{
+      const meta = STATUS_META[c.status]||STATUS_META.active;
+      return `<div class="partner-row">
+        <div>
+          <div style="font-weight:700;">${meta.dot} ${c.name} <span style="font-weight:400;font-size:12px;color:var(--ink-faint);">— ${meta.label}</span></div>
+          <div style="font-size:12px;color:var(--ink-faint);">${c.portalUrl} · user: ${c.username}${c.notes?' · '+c.notes:''}</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="btn btn-outline" style="padding:6px 12px;font-size:12.5px;" onclick="simulateLoginToPartner('${c.id}')">Login</button>
+          <button class="btn btn-outline" style="padding:6px 12px;font-size:12.5px;" onclick="toggleSupplierDisabled('${c.id}')">${c.status==='disabled'?'Enable':'Disable'}</button>
+          <button class="btn btn-outline" style="padding:6px 12px;font-size:12.5px;color:var(--coral);" onclick="removeSupplierConnection('${c.id}')">Remove</button>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+function addSupplierConnection(){
+  const name=document.getElementById('supplierNameInput').value.trim();
+  const portalUrl=document.getElementById('supplierUrlInput').value.trim();
+  const username=document.getElementById('supplierUserInput').value.trim();
+  const notes=document.getElementById('supplierNotesInput').value.trim();
+  const status=document.getElementById('supplierStatusInput').value;
+  const passwordEl=document.getElementById('supplierPassInput');
+  const hadPassword = passwordEl && passwordEl.value.length>0;
+  if(!name||!portalUrl||!username){ showToast('Please fill in partner name, portal URL and username'); return; }
+  state.supplierConnections.push({id:'S'+Math.random().toString(36).slice(2,7).toUpperCase(), name, portalUrl, username, notes, status, addedAt:new Date().toLocaleDateString('en-GB')});
+  state.supplierForm={name:'',portalUrl:'',username:'',status:'active',notes:''};
+  if(passwordEl) passwordEl.value='';
+  logActivity('B2B partner added: '+name+(hadPassword?' (password entered was discarded, not stored)':''));
+  showToast(hadPassword ? 'Partner saved — the password you entered was not stored anywhere' : 'Partner saved');
+  render();
+}
+function removeSupplierConnection(id){
+  const c = state.supplierConnections.find(x=>x.id===id);
+  state.supplierConnections = state.supplierConnections.filter(x=>x.id!==id);
+  if(c) logActivity('B2B partner removed: '+c.name);
+  render();
+}
+function toggleSupplierDisabled(id){
+  const c = state.supplierConnections.find(x=>x.id===id);
+  if(!c) return;
+  c.status = c.status==='disabled' ? 'active' : 'disabled';
+  logActivity('B2B partner '+(c.status==='disabled'?'disabled':'enabled')+': '+c.name);
+  render();
+}
+/* simulateLoginToPartner(): models "administrator clicks Login, system uses
+   the stored credential to sign into the partner portal." No real network
+   request happens — outcome is picked from a small deterministic set of
+   realistic states, same categories a real integration would report
+   (connected / needs manual verification / session expired / failed). Per
+   your spec, a real system must never attempt to bypass CAPTCHA/MFA/OTP —
+   it should stop and ask the human admin to complete it, which is exactly
+   what the "Verification required" outcome represents here. */
+function simulateLoginToPartner(id){
+  const c = state.supplierConnections.find(x=>x.id===id);
+  if(!c) return;
+  showToast('Logging into '+c.name+'…');
+  setTimeout(()=>{
+    let seed=0; for(let i=0;i<(c.id+Date.now()).length;i++) seed=(seed*31+(c.id+Date.now()).charCodeAt(i))>>>0;
+    const outcomes=['active','active','active','verification_required','session_expired','login_failed'];
+    const outcome = outcomes[seed%outcomes.length];
+    c.status = outcome;
+    logActivity('Login attempt to '+c.name+': '+STATUS_META[outcome].label);
+    if(outcome==='verification_required'){
+      showToast(c.name+': additional verification required — please complete it manually on the partner site.');
+    } else if(outcome==='active'){
+      showToast(c.name+': connected successfully.');
+    } else {
+      showToast(c.name+': '+STATUS_META[outcome].label.toLowerCase()+'.');
+    }
+    render();
+  }, 700);
+}
+
+/* ---------------- FARE COLLECTION TAB ---------------- */
+function adminTabFareCollection(){
+  const q=state.fareCollectionQuery;
+  return `
+  <div class="card">
+    <h3>Run fare collection</h3>
+    <div class="card-sub">Simulates checking every active B2B partner for a route and picking the lowest net fare — this is what runs automatically behind every customer search.</div>
+    <div class="form-grid g3">
+      <div class="fg"><label>From</label><select onchange="state.fareCollectionQuery.fromCode=this.value">${AIRPORTS.map(a=>`<option value="${a.code}" ${q.fromCode===a.code?'selected':''}>${a.city} (${a.code})</option>`).join('')}</select></div>
+      <div class="fg"><label>To</label><select onchange="state.fareCollectionQuery.toCode=this.value">${AIRPORTS.map(a=>`<option value="${a.code}" ${q.toCode===a.code?'selected':''}>${a.city} (${a.code})</option>`).join('')}</select></div>
+      <div class="fg"><label>Date</label><input type="date" value="${q.date}" onchange="state.fareCollectionQuery.date=this.value"></div>
+    </div>
+    <button class="btn btn-primary" style="margin-top:14px;" onclick="runFareCollection()">Run collection</button>
+  </div>
+  ${q.log ? `
+  <div class="card">
+    <h3>Results: ${q.log.fromCode} → ${q.log.toCode}</h3>
+    ${q.log.rows.map(r=>`<div class="review-row"><span>${r.failed?'❌':'✅'} ${r.name}</span><span>${r.failed?r.reason:fmtMoney(r.price)+(r.selected?' — ✓ Selected (lowest)':'')}</span></div>`).join('')}
+    <div class="review-row" style="border-top:2px solid var(--border);margin-top:6px;padding-top:12px;">
+      <span><strong>Net fare (lowest)</strong></span><span>${fmtMoney(q.log.netFare)}</span>
+    </div>
+    <div class="review-row"><span>Mohammad Travels markup</span><span>${fmtMoney(q.log.markup)}</span></div>
+    <div class="review-row"><span><strong>Customer selling price</strong></span><span><strong>${fmtMoney(q.log.sellingPrice)}</strong></span></div>
+  </div>` : ''}`;
+}
+function runFareCollection(){
+  const q=state.fareCollectionQuery;
+  if(q.fromCode===q.toCode){ showToast('Choose two different airports'); return; }
+  const from=AIRPORTS.find(a=>a.code===q.fromCode), to=AIRPORTS.find(a=>a.code===q.toCode);
+  const flights=genFlights(from,to);
+  const cheapest=[...flights].sort((x,y)=>x.price-y.price)[0];
+  const activeSources = state.supplierConnections.length ? state.supplierConnections.filter(c=>c.status!=='disabled') : PARTNER_SOURCES.slice(1).map(name=>({name,status:'active'}));
+  const allSourceNames = ['Mohammad Travels (direct)', ...(state.supplierConnections.length ? state.supplierConnections.map(c=>c.name) : PARTNER_SOURCES.slice(1))];
+  const rows = simulateFareComparison(cheapest.price, q.fromCode+q.toCode+q.date, allSourceNames).map(r=>{
+    const partnerRecord = state.supplierConnections.find(c=>c.name===r.name);
+    const failed = partnerRecord && (partnerRecord.status==='login_failed' || partnerRecord.status==='session_expired' || partnerRecord.status==='disabled');
+    return failed ? {...r, failed:true, reason: STATUS_META[partnerRecord.status].label} : r;
+  });
+  const succeeded = rows.filter(r=>!r.failed).sort((a,b)=>a.price-b.price);
+  succeeded.forEach((r,i)=>{ r.selected = i===0; });
+  const netFare = succeeded[0] ? succeeded[0].price : cheapest.price;
+  const markup = computeMarkup(netFare, q.fromCode, q.toCode, state.cabin);
+  q.log = {fromCode:q.fromCode, toCode:q.toCode, rows, netFare, markup, sellingPrice: netFare+markup};
+  logActivity('Fare collection run: '+q.fromCode+' → '+q.toCode+' — selling price '+fmtMoney(netFare+markup));
+  render();
+}
+
+/* ---------------- BOOKINGS TAB (admin sees supplier detail; customers never do) ---------------- */
+function adminTabBookings(){
+  const bookings = state.adminNotifications.filter(n=>n.kind==='flight'||n.kind==='hotel');
+  const segments = state.adminNotifications.filter(n=>n.kind==='segment_selected');
+  return `
+  <div class="card"><h3>Bookings (${bookings.length})</h3>
+  ${bookings.length===0 ? `<p style="color:var(--ink-faint);font-size:13.5px;">No completed bookings yet.</p>` :
+  bookings.map(n=>`
+    <div class="review-row" style="align-items:flex-start;">
+      <div>
+        <div style="font-weight:700;">${n.kind==='flight'?n.route:n.hotel} ${n.agent?'<span class="pax-badge">via '+n.agent+'</span>':''}</div>
+        <div style="font-size:12px;color:var(--ink-faint);">${n.time} · ${n.kind==='flight'?n.bookingRef+' / '+n.pnr:n.bookingRef}</div>
+        ${n.kind==='flight' && n.supplierName ? `<div style="font-size:12px;color:var(--ink-faint);margin-top:4px;">Supplier: ${n.supplierName} · Net fare: ${fmtMoney(n.netFare)} · Markup: ${fmtMoney(n.markup)}</div>` : ''}
+      </div>
+      <div style="text-align:right;">
+        <div style="font-weight:700;">${n.total}</div>
+        <button class="btn btn-outline" style="padding:5px 10px;font-size:11.5px;margin-top:4px;" onclick="n.ticketIssued=true; logActivity('Ticket issued for '+('${(n.bookingRef||'').replace(/'/g,"")}')); render();">${n.ticketIssued?'✓ Ticket issued':'Issue ticket'}</button>
+      </div>
+    </div>`).join('')}
+  </div>
+  <div class="card"><h3>Segment selections awaiting checkout (${segments.length})</h3>
+  ${segments.length===0 ? `<p style="color:var(--ink-faint);font-size:13.5px;">None right now.</p>` :
+  segments.slice(0,10).map(n=>`<div class="review-row"><span>${n.route} — ${n.flight}</span><span>${n.price}</span></div>`).join('')}
+  </div>`;
+}
+
+/* ---------------- PRICING & MARKUP TAB ---------------- */
+function adminTabPricing(){
+  const r=state.pricingRules; const of_=state.pricingOverrideForm;
+  return `
+  <div class="card">
+    <h3>Default markup</h3>
+    <div class="card-sub">Applied to every route unless a more specific rule below matches.</div>
+    <div class="form-grid g3">
+      <div class="fg"><label>Type</label><select onchange="state.pricingRules.defaultType=this.value; render();"><option value="percentage" ${r.defaultType==='percentage'?'selected':''}>Percentage</option><option value="fixed" ${r.defaultType==='fixed'?'selected':''}>Fixed amount</option></select></div>
+      <div class="fg"><label>Value ${r.defaultType==='percentage'?'(%)':'(BDT)'}</label><input type="number" value="${r.defaultValue}" oninput="state.pricingRules.defaultValue=parseFloat(this.value)||0"></div>
+      <div class="fg" style="align-self:end;"><button class="btn btn-primary" onclick="logActivity('Default markup updated: '+state.pricingRules.defaultType+' '+state.pricingRules.defaultValue); showToast('Default markup saved');">Save</button></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Route-specific overrides</h3>
+    <div class="form-grid g3">
+      <div class="fg"><label>From (optional)</label><select onchange="state.pricingOverrideForm.from=this.value"><option value="">Any</option>${AIRPORTS.map(a=>`<option value="${a.code}">${a.code}</option>`).join('')}</select></div>
+      <div class="fg"><label>To (optional)</label><select onchange="state.pricingOverrideForm.to=this.value"><option value="">Any</option>${AIRPORTS.map(a=>`<option value="${a.code}">${a.code}</option>`).join('')}</select></div>
+      <div class="fg"><label>Cabin (optional)</label><select onchange="state.pricingOverrideForm.cabin=this.value"><option value="">Any</option><option>Economy</option><option>Premium Economy</option><option>Business</option><option>First</option></select></div>
+      <div class="fg"><label>Type</label><select onchange="state.pricingOverrideForm.type=this.value"><option value="percentage">Percentage</option><option value="fixed">Fixed amount</option></select></div>
+      <div class="fg"><label>Value</label><input type="number" value="${of_.value}" oninput="state.pricingOverrideForm.value=parseFloat(this.value)||0"></div>
+      <div class="fg" style="align-self:end;"><button class="btn btn-primary" onclick="addPricingOverride()">Add rule</button></div>
+    </div>
+    ${r.overrides.length===0 ? `<p style="color:var(--ink-faint);font-size:13.5px;margin-top:10px;">No route-specific rules yet.</p>` :
+    r.overrides.map((o,i)=>`<div class="review-row"><span>${o.from||'Any'} → ${o.to||'Any'} ${o.cabin?'· '+o.cabin:''}</span><span>${o.type==='fixed'?fmtMoney(o.value):o.value+'%'} <button class="btn-text" onclick="removePricingOverride(${i})">Remove</button></span></div>`).join('')}
+  </div>`;
+}
+function addPricingOverride(){
+  const of_=state.pricingOverrideForm;
+  state.pricingRules.overrides.push({...of_});
+  logActivity('Pricing override added: '+(of_.from||'Any')+' → '+(of_.to||'Any')+' = '+(of_.type==='fixed'?fmtMoney(of_.value):of_.value+'%'));
+  state.pricingOverrideForm={from:'',to:'',cabin:'',type:'percentage',value:5};
+  showToast('Pricing rule added');
+  render();
+}
+function removePricingOverride(i){
+  state.pricingRules.overrides.splice(i,1);
+  render();
+}
+
+/* ---------------- ACTIVITY LOGS TAB ---------------- */
+function adminTabActivityLogs(){
+  return `<div class="card"><h3>Activity log</h3>
+  ${state.activityLogs.length===0 ? `<p style="color:var(--ink-faint);font-size:13.5px;">No activity recorded yet this session.</p>` :
+  state.activityLogs.map(l=>`<div class="review-row"><span>${l.text}</span><span style="color:var(--ink-faint);font-size:12px;">${l.time}</span></div>`).join('')}
+  </div>`;
+}
+function adminTabSettings(){
+  return `<div class="card">
+    <h3>Account</h3>
+    <div class="review-row"><span>Logged in as</span><span>${state.adminAuth.email}</span></div>
+    <button class="btn btn-outline" style="margin-top:12px;" onclick="adminLogout()">Log out</button>
+  </div>
+  <div class="security-note">🔒 <span>A production settings page would let an admin change their own password (server-verified, hashed), manage other staff accounts and roles (Super Admin / Admin / Staff), and review login history — none of which a static prototype can safely implement.</span></div>`;
+}
+
+/* ---------------- B2B TRAVEL AGENCY PORTAL ----------------
+/* ---------------- B2B TRAVEL AGENCY PORTAL ----------------
+   A separate login/dashboard for travel agencies booking on behalf of their
+   clients — distinct branding and fields from the consumer login. */
+function agencyLoginHTML(){
+  const f=state.agencyForm; const e=state.errors; const cap=state.captcha.agency;
+  return `<div class="page-body">
+    <div class="auth-wrap" style="max-width:440px;">
+      <div class="card" style="border-top:3px solid var(--gold);">
+        <div class="hc-badge" style="background:#FDF1DF;color:var(--gold-deep);border-color:#F0DDB0;">B2B Partner Portal</div>
+        <h3 style="margin-top:8px;">Travel agency login</h3>
+        <div class="card-sub">For registered travel agents and corporate partners booking on behalf of clients.</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="fg ${e.ag_name?'invalid':''}"><label>Agency name <span class="req-star">*</span></label><input type="text" value="${f.agencyName}" oninput="state.agencyForm.agencyName=this.value" placeholder="e.g. Sundarban Travel &amp; Tours"><span class="err">Please enter your agency name.</span></div>
+          <div class="fg ${e.ag_iata?'invalid':''}"><label>IATA / TIDS number <span class="req-star">*</span></label><input type="text" value="${f.iataCode}" oninput="state.agencyForm.iataCode=this.value" placeholder="e.g. 12-3 4567"><span class="err">Please enter your agency's IATA/TIDS number.</span></div>
+          <div class="fg ${e.ag_email?'invalid':''}"><label>Business email <span class="req-star">*</span></label><input type="email" value="${f.email}" oninput="state.agencyForm.email=this.value" placeholder="agent@youragency.com"><span class="err">Please enter a valid business email.</span></div>
+          <div class="fg ${e.ag_password?'invalid':''}"><label>Password <span class="req-star">*</span></label><input type="password" value="${f.password}" oninput="state.agencyForm.password=this.value" placeholder="••••••••"><span class="err">Please enter your password.</span></div>
+          ${captchaWidget('agency')}
+          ${e.ag_captcha?'<div class="err" style="display:block;">Please confirm you are not a robot.</div>':''}
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:16px;" onclick="submitAgencyLogin()">Log in to partner portal</button>
+        <div class="security-note">🔒 <span>New agency? In production this would route to a verification &amp; contracting workflow before granting net-fare access — this demo logs any complete form straight in.</span></div>
+      </div>
+    </div>
+  </div>`;
+}
+function submitAgencyLogin(){
+  const f=state.agencyForm; const errors={};
+  if(!f.agencyName.trim()) errors.ag_name=true;
+  if(!f.iataCode.trim()) errors.ag_iata=true;
+  if(!f.email.includes('@')) errors.ag_email=true;
+  if(!f.password) errors.ag_password=true;
+  if(!state.captcha.agency.checked) errors.ag_captcha=true;
+  state.errors=errors;
+  if(Object.keys(errors).length){ render(); showToast('Please complete the required fields'); return; }
+  state.agencyUser = {agencyName:f.agencyName.trim(), iataCode:f.iataCode.trim(), email:f.email.trim()};
+  state.agencyForm={agencyName:'',iataCode:'',contactPerson:'',email:'',phone:'',password:''};
+  state.captcha.agency={checked:false,loading:false};
+  showToast('Logged in to the partner portal');
+  state.view='agencyDashboard'; render();
+}
+function agencyLogoutUser(){ state.agencyUser=null; showToast('Logged out of the partner portal'); state.view='home'; render(); }
+function agencyDashboardHTML(){
+  const a=state.agencyUser; const c=state.agencyCompare;
+  return `
+  <div class="page-hero" style="background:linear-gradient(100deg,var(--navy),#173B57);"><div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+      <div><h1 style="margin-bottom:4px;">Welcome, ${a.agencyName}</h1><p>IATA/TIDS ${a.iataCode} · Partner portal</p></div>
+      <button class="btn btn-ghost-dark" onclick="agencyLogoutUser()">Log out</button>
+    </div>
+  </div></div>
+  <div class="page-body">
+    <div class="card">
+      <h3>Check the best fare for your client</h3>
+      <div class="card-sub">We check our fare network and quote you Mohammad Travels' best available selling price — our supplier sourcing stays internal, same as it would for any other customer.</div>
+      <div class="form-grid g3">
+        <div class="fg"><label>From</label><select onchange="state.agencyCompare.fromCode=this.value">${AIRPORTS.map(ap=>`<option value="${ap.code}" ${c.fromCode===ap.code?'selected':''}>${ap.city} (${ap.code})</option>`).join('')}</select></div>
+        <div class="fg"><label>To</label><select onchange="state.agencyCompare.toCode=this.value">${AIRPORTS.map(ap=>`<option value="${ap.code}" ${c.toCode===ap.code?'selected':''}>${ap.city} (${ap.code})</option>`).join('')}</select></div>
+        <div class="fg"><label>Date</label><input type="date" value="${c.date}" onchange="state.agencyCompare.date=this.value"></div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:14px;" onclick="runAgencyCompare()">Check best fare</button>
+      ${c.result ? `<div style="margin-top:16px;padding:14px;background:var(--success-bg);border-radius:10px;"><div style="font-size:12px;color:var(--ink-faint);">Best available price</div><div style="font-size:20px;font-weight:700;color:var(--success);">${fmtMoney(c.result.sellingPrice)}</div></div><button class="btn btn-outline" style="margin-top:10px;" onclick="bookAgencyFare()">Search this route to book for a client</button>` : ''}
+    </div>
+    <div class="card">
+      <h3>This session's agency bookings</h3>
+      ${state.adminNotifications.filter(n=>n.agent===a.agencyName).length===0 ? `<p style="color:var(--ink-faint);font-size:13.5px;">No bookings made under your agency yet this session.</p>` :
+        state.adminNotifications.filter(n=>n.agent===a.agencyName).map(n=>`<div class="review-row"><span>${n.kind==='flight'?n.route:n.hotel}</span><span>${n.total}</span></div>`).join('')}
+    </div>
+  </div>`;
+}
+function runAgencyCompare(){
+  const c=state.agencyCompare;
+  if(c.fromCode===c.toCode){ showToast('Choose two different airports'); return; }
+  const from=AIRPORTS.find(a=>a.code===c.fromCode), to=AIRPORTS.find(a=>a.code===c.toCode);
+  const flights=genFlights(from,to);
+  const cheapest=[...flights].sort((x,y)=>x.price-y.price)[0];
+  const rows = simulateFareComparison(cheapest.price, c.fromCode+c.toCode+c.date, getActiveSources());
+  const netFare = rows[0].price;
+  const markup = computeMarkup(netFare, c.fromCode, c.toCode, state.cabin);
+  c.result = {netFare, markup, sellingPrice: netFare+markup};
+  render();
+}
+function bookAgencyFare(){
+  const c=state.agencyCompare;
+  state.from=AIRPORTS.find(a=>a.code===c.fromCode); state.to=AIRPORTS.find(a=>a.code===c.toCode);
+  state.departDate=c.date; state.tripType='oneway';
+  doSearch();
+}
+
+/* ---------------- AI ASSISTANT (scripted demo + simulated price-check) ---------------- */
+let aiStep=0;
+const aiScript=[
+  {bot:"Hi! I'm the Mohammad Travels assistant. Where would you like to fly from and to, or ask me to check a destination's price?", quick:['Dhaka to Singapore','Dhaka to Dubai','Check a price']},
+  {bot:"Got it — {route}. What date would you like to travel?", quick:['10 October','Flexible']},
+  {bot:"Would you like one-way or return?", quick:['Return','One-way']},
+  {bot:"Searching our airline partners for real fares now — I'll open the results for you.", quick:['Show results']},
+];
+let aiRoute='';
+let aiPendingDest=null, aiPendingOrigin=null;
+function toggleAI(){
+  const panel=document.getElementById('aiPanel');
+  panel.classList.toggle('open');
+  if(panel.classList.contains('open') && !panel.dataset.started){
+    panel.dataset.started='1'; aiStep=0; aiRoute='';
+    document.getElementById('aiBody').innerHTML='';
+    pushAI(aiScript[0].bot, aiScript[0].quick);
+  }
+}
+function pushAI(text,quick){
+  const body=document.getElementById('aiBody');
+  body.insertAdjacentHTML('beforeend', `<div class="msg bot">${text}</div>`);
+  body.scrollTop=body.scrollHeight;
+  const q=document.getElementById('aiQuick');
+  q.innerHTML = (quick||[]).map(c=>`<button class="qchip" onclick="aiPick('${c.replace(/'/g,"\\'")}')">${c}</button>`).join('');
+}
+function aiSendText(){
+  const input=document.getElementById('aiTextInput');
+  const text=input.value.trim();
+  if(!text) return;
+  const body=document.getElementById('aiBody');
+  body.insertAdjacentHTML('beforeend', `<div class="msg user">${text}</div>`);
+  body.scrollTop=body.scrollHeight;
+  document.getElementById('aiQuick').innerHTML='';
+  input.value='';
+  aiRespond(text);
+}
+/* Simulated intent handling: detects a destination + price-related wording and
+   runs the same simulateFareComparison() used elsewhere in the app. This is
+   NOT a live price lookup — see the note above simulateFareComparison(). */
+function aiRespond(userText){
+  const t=userText.toLowerCase();
+  const priceIntent = /price|fare|compare|cheap|cost/.test(t);
+  const destAirport = AIRPORTS.find(a=> t.includes(a.city.toLowerCase()) || t.includes(a.code.toLowerCase()));
+  setTimeout(()=>{
+    if(priceIntent){
+      if(!destAirport){
+        pushAI("Which destination would you like me to check? For example: \"check price for Bangkok\".");
+        return;
+      }
+      const origin = (state.from && state.from.code!==destAirport.code) ? state.from : AIRPORTS.find(a=>a.code==='DAC');
+      const flights = genFlights(origin, destAirport);
+      const cheapestOwn = [...flights].sort((a,b)=>a.price-b.price)[0];
+      const sources = getActiveSources();
+      const rows = simulateFareComparison(cheapestOwn.price, origin.code+destAirport.code+todayISO(30), sources);
+      const netFare = rows[0].price;
+      const sellingPrice = netFare + computeMarkup(netFare, origin.code, destAirport.code, state.cabin);
+      aiPendingDest=destAirport; aiPendingOrigin=origin;
+      pushAI(`I checked our fare network for ${origin.city} → ${destAirport.city}. Best price I found: <strong>${fmtMoney(sellingPrice)}</strong> per passenger.`, ['Search this route']);
+    } else if(destAirport){
+      aiPendingDest=destAirport; aiPendingOrigin=state.from||AIRPORTS.find(a=>a.code==='DAC');
+      pushAI(`Want me to search flights to ${destAirport.city}, or check its price across our network first?`, ['Search flights','Check price']);
+    } else {
+      pushAI("I can help you search flights, check a destination's price, or answer baggage and visa questions. Try: \"check price for Dubai\".");
+    }
+  }, 500);
+}
+function aiPick(choice){
+  const body=document.getElementById('aiBody');
+  body.insertAdjacentHTML('beforeend', `<div class="msg user">${choice}</div>`);
+  body.scrollTop=body.scrollHeight;
+  document.getElementById('aiQuick').innerHTML='';
+  if(choice==='Check a price'){
+    setTimeout(()=>pushAI("Sure — which destination? For example: Bangkok, Dubai, Kuala Lumpur, Jeddah."),400);
+    return;
+  }
+  if(choice==='Search this route' || choice==='Search flights'){
+    if(aiPendingDest){
+      const dest=aiPendingDest, origin=aiPendingOrigin||AIRPORTS.find(a=>a.code==='DAC');
+      toggleAI(); state.from=origin; state.to=dest; doSearch();
+    }
+    return;
+  }
+  if(choice==='Check price'){
+    if(aiPendingDest) aiRespond('check price for '+aiPendingDest.city);
+    return;
+  }
+  if(aiStep===0){ aiRoute=choice; }
+  aiStep++;
+  setTimeout(()=>{
+    if(aiStep<aiScript.length){
+      let text=aiScript[aiStep].bot.replace('{route}',aiRoute);
+      pushAI(text, aiScript[aiStep].quick);
+    }
+    if(choice==='Show results'){
+      toggleAI();
+      if(aiRoute.toLowerCase().includes('dubai')){ state.to=AIRPORTS.find(a=>a.code==='DXB'); } else { state.to=AIRPORTS.find(a=>a.code==='SIN'); }
+      state.from=AIRPORTS.find(a=>a.code==='DAC');
+      doSearch();
+    }
+  }, 500);
+}
+
+/* ---------------- INIT ---------------- */
+render();
+</script>
+</body>
+</html>
